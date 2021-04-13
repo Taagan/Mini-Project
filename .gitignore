@@ -3,7 +3,11 @@
 [Oo]bj/
 [Bb]uild/
 [Bb]uilds/
+[Ll]ogs/
+[Uu]ser[Ss]ettings/
 Assets/AssetStoreTools*
+
+/[Mm]emoryCaptures/
 
 # Visual Studio cache directory
 .vs/
