@@ -2251,7 +2251,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2040497901}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 686.75397, y: 495.60217, z: -48.92242}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2275,7 +2275,7 @@ MonoBehaviour:
   m_PlayButton: {fileID: 328637120}
   m_SettingsButton: {fileID: 520289436}
   m_QuitGameButton: {fileID: 1816296608}
-  m_BackToMenuButton: {fileID: 1981455116}
+  m_BackToMainButton: {fileID: 1981455116}
   m_SampleButton: {fileID: 1716185389}
   m_TobiasButton: {fileID: 484768587}
   m_OssianButton: {fileID: 66023399}
