@@ -11,8 +11,10 @@ public class Afraid : Node
     {
         if (enemy.Courage <= 0)
         {
+            Debug.Log("afraid");
             return NodeState.Success;
         }
+        Debug.Log("not afraid");
         return NodeState.Failure;
     }
 }

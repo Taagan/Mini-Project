@@ -1,8 +1,16 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class NormalEnemy : Enemy
 {
     [SerializeField] private Rigidbody rb;
+    [SerializeField] private float maxStamina;
+    [SerializeField] private float restingAmountStamina = 50;
+    [SerializeField] private float restingRateStamina = 0.2f;
+    [SerializeField] private float attackRateStamina = 0.1f;
+    [SerializeField] private float fleeRateStamina = 0.2f;
+    [SerializeField] private float idleRateStamina = 0.4f;
+    [SerializeField] private Slider staminaSlider;
 
 
     Node baseNode;
@@ -30,6 +38,7 @@ public class NormalEnemy : Enemy
 
         attackMode.AddChild(playerNear);
         attackMode.AddChild(inv);
+        attackMode.AddChild(stamina);
         attackMode.AddChild(attackNode);
 
         inv.AddChild(afraid);
@@ -45,10 +54,13 @@ public class NormalEnemy : Enemy
     public void FixedUpdate()
     {
         baseNode.Execute();
+        staminaSlider.value = stamina / maxStamina;
+        //Debug.Log(stamina);
     }
 
     public override void Attack()
     {
+        rb.velocity = Vector3.zero;
         float moveSpeed = speed * Time.deltaTime;
 
         //Do attack behaviour
@@ -62,36 +74,63 @@ public class NormalEnemy : Enemy
 
         rb.velocity = transform.forward * moveSpeed;
 
+        stamina -= attackRateStamina;
         Debug.Log("Attacking");
     }
 
     public override void Flee()
     {
+        rb.velocity = Vector3.zero;
         float moveSpeed = speed * Time.deltaTime;
 
-        //Do attack behaviour
+        //Do flee behaviour
         Vector3 targetDir = player.transform.position - transform.position;
 
-        Vector3 newDir = Vector3.RotateTowards(transform.forward, targetDir, moveSpeed, 0.0f);
+        Vector3 newDir = Vector3.RotateTowards(transform.forward, -targetDir, moveSpeed, 0.0f);
 
         Debug.DrawRay(transform.position, newDir, Color.red);
 
-        transform.rotation = Quaternion.LookRotation(-newDir);
+        transform.rotation = Quaternion.LookRotation(newDir);
 
         rb.velocity = transform.forward * moveSpeed;
+
+        stamina -= fleeRateStamina;
+
 
         Debug.Log("Fleeing");
     }
 
     public override void Idle()
     {
+        rb.velocity = Vector3.zero;
+        if (resting)
+        {
+            stamina += restingRateStamina;
+            if (stamina >= restingAmountStamina || stamina >= maxStamina)
+            {
+                resting = false;
+            }
+        }
+        else
+        {
+            stamina += idleRateStamina;
+        }
+        if (stamina >= maxStamina)
+        {
+            stamina = maxStamina;
+        }
+        else if (stamina <= 0)
+        {
+            stamina = 0;
+        }
         //Do idle behaviour
-        //Debug.Log("Idle");
+        Debug.Log("Idle");
+
     }
 
 
     [SerializeField]
-    public void UpdateStats(GameObject player, int hp, int speed, int atkDamage, int aggroRange, int stamina, double courage)
+    public void UpdateStats(GameObject player, int hp, int speed, int atkDamage, int aggroRange, int stamina, float courage)
     {
         this.player = player;
         this.hp = hp;

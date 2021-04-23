@@ -9,8 +9,9 @@ public class Enemy : MonoBehaviour
     [SerializeField] protected int speed;
     [SerializeField] protected int atkDamage;
     [SerializeField] protected int aggroRange;
-    [SerializeField] protected int stamina;
-    [SerializeField] protected double courage;
+    [SerializeField] protected float stamina;
+    [SerializeField] protected float courage;
+    [SerializeField] protected bool resting;
 
     public Enemy()
     {
@@ -27,10 +28,11 @@ public class Enemy : MonoBehaviour
 
     public virtual int AggroRange { get { return aggroRange; } }
 
-    public virtual int Stamina { get { return stamina; } }
+    public virtual float Stamina { get { return stamina; } }
 
-    public virtual double Courage { get { return courage; } }
+    public virtual float Courage { get { return courage; } }
 
+    public virtual bool Resting { get { return resting; } set { resting = value; } }
 
     public virtual void Execute() { }
 

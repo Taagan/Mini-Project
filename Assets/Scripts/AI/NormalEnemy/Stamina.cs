@@ -9,10 +9,19 @@ public class Stamina : Node
 
     public override NodeState Execute()
     {
-        if (enemy.Stamina > 0)
+        if (enemy.Stamina > 0 && !enemy.Resting)
         {
+            Debug.Log("not resting");
             return NodeState.Success;
         }
+        else if (!enemy.Resting)
+        {
+            Debug.Log("go rest");
+            enemy.Resting = true;
+            Debug.Log(enemy.Resting);
+            return NodeState.Failure;
+        }
+        Debug.Log("resting");
         return NodeState.Failure;
     }
 }

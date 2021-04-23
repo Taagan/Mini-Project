@@ -11,8 +11,10 @@ public class SelectorNode : Node
     public override NodeState Execute()
     {
         for (int i = 0; i < children.Count; i++)
+        {
             if (children[i].Execute() == NodeState.Success)
                 return NodeState.Success;
+        }
 
         return NodeState.Failure;
     }
