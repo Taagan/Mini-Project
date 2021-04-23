@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class InverterNode : Node
 {
-    public InverterNode(BT_Tree bt) : base(bt) { }
+    public InverterNode(Enemy enemy) : base(enemy) { }
 
 
 

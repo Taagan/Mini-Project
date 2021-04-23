@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AttackNode : Node
 {
-    public AttackNode(BT_Tree bt) : base(bt) { }
+    public AttackNode(Enemy enemy) : base(enemy) { }
 
 
 
@@ -12,7 +12,7 @@ public class AttackNode : Node
     public override NodeState Execute()
     {
         //Give Extra stuff for attack(Currently no more info needed)
-        bt.Attack();
+        enemy.Attack();
         return NodeState.Success;
     }
 }

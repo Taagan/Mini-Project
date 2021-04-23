@@ -5,9 +5,7 @@ using UnityEngine;
 public class SelectorNode : Node
 {
 
-    public SelectorNode(BT_Tree bt) : base(bt) { }
-
-
+    public SelectorNode(Enemy enemy) : base(enemy) { }
 
 
     public override NodeState Execute()

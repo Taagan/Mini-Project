@@ -4,9 +4,7 @@ using UnityEngine;
 
 public class SequenceNode : Node
 {
-    public SequenceNode(BT_Tree bt) : base(bt) { }
-
-
+    public SequenceNode(Enemy enemy) : base(enemy) { }
 
 
     public override NodeState Execute()

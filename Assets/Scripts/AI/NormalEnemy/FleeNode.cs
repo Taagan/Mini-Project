@@ -4,15 +4,13 @@ using UnityEngine;
 
 public class FleeNode : Node
 {
-    public FleeNode(BT_Tree bt) : base(bt) { }
-
-
+    public FleeNode(Enemy enemy) : base(enemy) { }
 
 
     public override NodeState Execute()
     {
         //Give Extra stuff for flee(Currently no more info needed)
-        bt.Flee();
+        enemy.Flee();
         return NodeState.Success;
     }
 }
