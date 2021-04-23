@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class MenuManager : MonoBehaviour
+public class MenuEvents : MonoBehaviour
 {
     [Space(3), Header("Menus")]
     [SerializeField] private GameObject m_Main;
