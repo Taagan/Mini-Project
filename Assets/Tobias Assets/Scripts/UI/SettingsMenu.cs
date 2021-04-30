@@ -87,11 +87,14 @@ public class SettingsMenu : MonoBehaviour
 
     private void ApplyChanges()
     {
-        m_SettingsManager.SaveSettings(SaveGameSettings());
-        m_SettingsManager.LoadSettings();
+        m_SettingsManager.Save(SaveToGameSettings());
+        m_SettingsManager.Apply();
     }
 
-    private GameSettings SaveGameSettings()
+    /// <summary>
+    /// Get current selected settings from UI and save to GameSettings
+    /// </summary>
+    private GameSettings SaveToGameSettings()
     {
         GameSettings currentSettings = new GameSettings();
 
@@ -111,10 +114,11 @@ public class SettingsMenu : MonoBehaviour
         return currentSettings;
     }
 
-    public void UpdateSettingsMenu()
+    /// <summary>
+    /// Use GameSettings to assign a value to each corresponding UI element
+    /// </summary>
+    public void Refresh(GameSettings gameSettings)
     {
-        GameSettings gameSettings = m_SettingsManager.GameSettings;
-
         m_FullscreenToggle.isOn = gameSettings.IsFullscreen;
 
         m_ResolutionDropdown.value = gameSettings.ResolutionIndex;

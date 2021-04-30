@@ -36,7 +36,6 @@ public class SettingsManager : MonoBehaviour
     private string m_EffectsVolume;
     private string m_MouseSensitivity;
 
-    public GameSettings GameSettings => m_GameSettings;
     public Resolution[] Resolutions => m_Resolutions;
 
     private void Start()
@@ -59,13 +58,16 @@ public class SettingsManager : MonoBehaviour
         m_EffectsVolume = "EffectsVolume";
         m_MouseSensitivity = "MouseSensitivity";
 
-        LoadSettings();
-        SetSettings();
+        Load();
+        Apply();
 
-        m_SettingsMenu.UpdateSettingsMenu();
+        m_SettingsMenu.Refresh(m_GameSettings);
     }
 
-    public void LoadSettings()
+    /// <summary>
+    /// Get saved data from PlayerPrefs and assign each corresponding value in GameSettings
+    /// </summary>
+    private void Load()
     {
         m_GameSettings.IsFullscreen = Convert.ToBoolean(PlayerPrefs.GetInt(m_Fullscreen, 0));
         m_GameSettings.ResolutionIndex = PlayerPrefs.GetInt(m_ResolutionIndex, m_Resolutions.Length - 1);
@@ -81,7 +83,10 @@ public class SettingsManager : MonoBehaviour
         m_GameSettings.MouseSensitivity = PlayerPrefs.GetFloat(m_MouseSensitivity, 1.0f);
     }
 
-    public void SetSettings()
+    /// <summary>
+    /// Update game's settings using each corresponding value from GameSettings
+    /// </summary>
+    public void Apply()
     {
         Screen.fullScreen = m_GameSettings.IsFullscreen;
         Screen.SetResolution(
@@ -101,7 +106,10 @@ public class SettingsManager : MonoBehaviour
         }
     }
 
-    public void SaveSettings(GameSettings gameSettings)
+    /// <summary>
+    /// Save GameSettings to file using PlayerPrefs
+    /// </summary>
+    public void Save(GameSettings gameSettings)
     {
         m_GameSettings = gameSettings;
 
