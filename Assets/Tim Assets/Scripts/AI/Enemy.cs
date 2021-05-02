@@ -5,6 +5,7 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     [SerializeField] protected GameObject player;
+    [SerializeField] protected int maxHp;
     [SerializeField] protected int hp;
     [SerializeField] protected int speed;
     [SerializeField] protected int atkDamage;
@@ -12,6 +13,8 @@ public class Enemy : MonoBehaviour
     [SerializeField] protected float stamina;
     [SerializeField] protected float courage;
     [SerializeField] protected bool resting;
+    [SerializeField] public enum Phase {I,II,III,IV};
+    [SerializeField] protected Phase currentPhase;
 
     public Enemy()
     {
@@ -19,6 +22,8 @@ public class Enemy : MonoBehaviour
     }
 
     public virtual GameObject Player { get { return player; } }
+
+    public virtual int MaxHp { get { return maxHp; } }
 
     public virtual int Hp { get { return hp; } }
 
@@ -33,6 +38,8 @@ public class Enemy : MonoBehaviour
     public virtual float Courage { get { return courage; } }
 
     public virtual bool Resting { get { return resting; } set { resting = value; } }
+
+    public virtual Phase CurrentPhase { get { return currentPhase; } set { currentPhase = value; } }
 
     public virtual void Execute() { }
 
