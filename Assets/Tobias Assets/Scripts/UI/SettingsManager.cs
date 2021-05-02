@@ -61,7 +61,7 @@ public class SettingsManager : MonoBehaviour
         Load();
         Apply();
 
-        m_SettingsMenu.Refresh(m_GameSettings);
+        m_SettingsMenu.Refresh(ref m_GameSettings);
     }
 
     /// <summary>
@@ -109,7 +109,7 @@ public class SettingsManager : MonoBehaviour
     /// <summary>
     /// Save GameSettings to file using PlayerPrefs
     /// </summary>
-    public void Save(GameSettings gameSettings)
+    public void Save(ref GameSettings gameSettings)
     {
         m_GameSettings = gameSettings;
 

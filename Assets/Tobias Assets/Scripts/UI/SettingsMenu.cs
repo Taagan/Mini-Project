@@ -87,7 +87,9 @@ public class SettingsMenu : MonoBehaviour
 
     private void ApplyChanges()
     {
-        m_SettingsManager.Save(SaveToGameSettings());
+        GameSettings gs = SaveToGameSettings();
+
+        m_SettingsManager.Save(ref gs);
         m_SettingsManager.Apply();
     }
 
@@ -117,7 +119,7 @@ public class SettingsMenu : MonoBehaviour
     /// <summary>
     /// Use GameSettings to assign a value to each corresponding UI element
     /// </summary>
-    public void Refresh(GameSettings gameSettings)
+    public void Refresh(ref GameSettings gameSettings)
     {
         m_FullscreenToggle.isOn = gameSettings.IsFullscreen;
 

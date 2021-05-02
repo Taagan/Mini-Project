@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.Events;
 
 [ExecuteInEditMode]
-public class HUDController : MonoBehaviour
+public class PlayerHUD : MonoBehaviour
 {
     [Space(3), Header("Bars")]
     [SerializeField] private Slider m_HealthBar;
@@ -23,6 +23,11 @@ public class HUDController : MonoBehaviour
     }
 
     private void LateUpdate()
+    {
+        Notify();
+    }
+
+    public void Notify()
     {
         m_HealthBar.value = m_PlayerHealth / m_PlayerMaxHealth;
         m_StaminaBar.value = m_PlayerStamina / m_PlayerMaxStamina;
