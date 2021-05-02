@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.UI;
 
 public class NormalEnemy : Enemy
@@ -11,7 +12,7 @@ public class NormalEnemy : Enemy
     [SerializeField] private float fleeRateStamina = 0.2f;
     [SerializeField] private float idleRateStamina = 0.4f;
     [SerializeField] private Slider staminaSlider;
-
+    [SerializeField] private NavMeshAgent navMeshAgent;
 
     Node baseNode;
     public NormalEnemy()
@@ -51,6 +52,12 @@ public class NormalEnemy : Enemy
     }
 
 
+    private void Start()
+    {
+        navMeshAgent.speed = speed;
+    }
+
+
     public void FixedUpdate()
     {
         baseNode.Execute();
@@ -60,22 +67,27 @@ public class NormalEnemy : Enemy
 
     public override void Attack()
     {
-        rb.velocity = Vector3.zero;
-        float moveSpeed = speed * Time.deltaTime;
+        navMeshAgent.SetDestination(player.transform.position);
 
-        //Do attack behaviour
-        Vector3 targetDir = player.transform.position - transform.position;
 
-        Vector3 newDir = Vector3.RotateTowards(transform.forward, targetDir, moveSpeed, 0.0f);
 
-        Debug.DrawRay(transform.position, newDir, Color.red);
 
-        transform.rotation = Quaternion.LookRotation(newDir);
+        //rb.velocity = Vector3.zero;
+        //float moveSpeed = speed * Time.deltaTime;
 
-        rb.velocity = transform.forward * moveSpeed;
+        ////Do attack behaviour
+        //Vector3 targetDir = player.transform.position - transform.position;
 
-        stamina -= attackRateStamina;
-        Debug.Log("Attacking");
+        //Vector3 newDir = Vector3.RotateTowards(transform.forward, targetDir, moveSpeed, 0.0f);
+
+        //Debug.DrawRay(transform.position, newDir, Color.red);
+
+        //transform.rotation = Quaternion.LookRotation(newDir);
+
+        //rb.velocity = transform.forward * moveSpeed;
+
+        //stamina -= attackRateStamina;
+        //Debug.Log("Attacking");
     }
 
     public override void Flee()
