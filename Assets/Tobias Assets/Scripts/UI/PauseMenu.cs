@@ -5,16 +5,19 @@ using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
+    [Space(3), Header("Options Buttons")]
     [SerializeField] private Button m_ResumeButton;
     [SerializeField] private Button m_CheckpointButton;
     [SerializeField] private Button m_RestartButton;
     [SerializeField] private Button m_MainMenuButton;
 
+    [Space(3), Header("UI Items")]
     [SerializeField] private GameObject m_HUD;     // player's head-up-display
     [SerializeField] private GameObject m_Confirm; // menu for user to confirm their selection
     [SerializeField] private GameObject m_Options; // all the options to select when paused
 
     private ConfirmMenu m_ConfirmMenu;
+
     public bool IsPaused { get; private set; }
 
     private void Start()
