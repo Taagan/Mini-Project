@@ -19,8 +19,11 @@ public class Boss_Dog : Enemy
     [SerializeField] private float idleRateStamina = 0.4f;
     [SerializeField] private Slider staminaSlider;
     [SerializeField] private NavMeshAgent navMeshAgent;
+    private bool charging;
+    private Vector3 lastPlayerPos;
 
     Node baseNode;
+
     public Boss_Dog()
     {
         baseNode = new SelectorNode(this);
@@ -97,6 +100,10 @@ public class Boss_Dog : Enemy
 
     private void Phase_II()
     {
+        if (sword.gameObject.active)
+        {
+            sword.SetActive(false);
+        }
         GameObject missle = (GameObject)Instantiate(magicMissle, this.transform.position + (transform.forward * 5), this.transform.rotation);
         missle.GetComponent<MagicMissleScript>().destiantion = player.transform.position;
         navMeshAgent.isStopped = true;
@@ -106,6 +113,7 @@ public class Boss_Dog : Enemy
 
     private void Phase_III()
     {
+
         Vector3 targetDir = player.transform.position - transform.position;
 
         Vector3 newDir = Vector3.RotateTowards(transform.forward, targetDir, 100, 0.0f);
@@ -114,15 +122,28 @@ public class Boss_Dog : Enemy
 
         Instantiate(minion, this.transform.position + (transform.forward * 5), this.transform.rotation);
         Instantiate(minion, this.transform.position + (transform.forward * 10), this.transform.rotation);
-        navMeshAgent.isStopped = true;
         stamina -= phase_III_StaminaRate;
         //Spawn minions
     }
 
     private void Phase_IV()
     {
-        navMeshAgent.isStopped = false;
-        stamina -= phase_IV_StaminaRate;
+        if (charging)
+        {
+            transform.position += transform.forward * speed * Time.deltaTime * 3;
+        }
+        else if (!charging)
+        {
+            lastPlayerPos = player.transform.position;
+
+            Vector3 targetDir = lastPlayerPos - transform.position;
+
+            Vector3 newDir = Vector3.RotateTowards(transform.forward, targetDir, 1000, 0.0f);
+
+            transform.rotation = Quaternion.LookRotation(newDir);
+
+            charging = true;
+        }
         //Charge
     }
 
@@ -153,6 +174,20 @@ public class Boss_Dog : Enemy
         //Do idle behaviour
         Debug.Log("Idle");
 
+    }
+
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (charging)
+        {
+            if (collision.gameObject.tag == "Player" || collision.gameObject.tag == "Wall")
+            {
+                stamina -= phase_IV_StaminaRate;
+                rb.velocity = Vector3.zero;
+                charging = false;
+            }
+        }
     }
 
 

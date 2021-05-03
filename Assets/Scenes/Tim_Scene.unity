@@ -362,7 +362,7 @@ GameObject:
   - component: {fileID: 267160667}
   m_Layer: 0
   m_Name: Floor (1)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 8
@@ -669,7 +669,7 @@ GameObject:
   - component: {fileID: 376464114}
   m_Layer: 0
   m_Name: Floor (3)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 8
@@ -1109,7 +1109,7 @@ GameObject:
   - component: {fileID: 1035455399}
   m_Layer: 0
   m_Name: Floor (4)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 8
@@ -1221,7 +1221,7 @@ GameObject:
   - component: {fileID: 1294679995}
   m_Layer: 0
   m_Name: Floor (2)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 8
@@ -2019,6 +2019,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Boss 1
       objectReference: {fileID: 0}
+    - target: {fileID: 630463110149110446, guid: ddb091d57753fa44daec200632e1cdae, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 630463110149110451, guid: ddb091d57753fa44daec200632e1cdae, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -2079,6 +2083,10 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1981560116}
+    - target: {fileID: 8146558873935796965, guid: ddb091d57753fa44daec200632e1cdae, type: 3}
+      propertyPath: phase_IV_StaminaRate
+      value: 100
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ddb091d57753fa44daec200632e1cdae, type: 3}
 --- !u!1001 &8768999929095377788
