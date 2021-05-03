@@ -12,6 +12,18 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1558258169924550663, guid: b58d88ab25bb5d743a512d1261f9d310, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1558258169924550663, guid: b58d88ab25bb5d743a512d1261f9d310, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1558258169924550663, guid: b58d88ab25bb5d743a512d1261f9d310, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1558258169924550663, guid: b58d88ab25bb5d743a512d1261f9d310, type: 3}
       propertyPath: m_LocalPosition.x
       value: 12.21
       objectReference: {fileID: 0}
@@ -53,7 +65,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8153390087426603304, guid: b58d88ab25bb5d743a512d1261f9d310, type: 3}
       propertyPath: m_Name
-      value: plant
+      value: plant Variant
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b58d88ab25bb5d743a512d1261f9d310, type: 3}
