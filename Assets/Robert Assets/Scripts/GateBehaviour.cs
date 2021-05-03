@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class GateBehaviour : MonoBehaviour
 {
+    public int keysToUnluck;
   
     private void OnTriggerEnter(Collider collider)
     {
-        if (collider.gameObject.name == "Player" && GameVariables.keyCount >= 3 )
+        if (collider.gameObject.name == "Player" && GameVariables.keysInventory >= keysToUnluck )
         {
-            GameVariables.keyCount = 0;
+            GameVariables.keysInventory -= keysToUnluck;
             Destroy(gameObject);
         }
     }

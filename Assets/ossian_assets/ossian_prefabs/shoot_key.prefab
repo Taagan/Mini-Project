@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3212884171857140462}
   - component: {fileID: 2595806071858504322}
   - component: {fileID: 3286738970673221172}
+  - component: {fileID: -4829929117942493700}
   m_Layer: 0
   m_Name: shoot_key
   m_TagString: Untagged
@@ -81,3 +82,16 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!135 &-4829929117942493700
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 316663119881546435}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1.1157885
+  m_Center: {x: 0.336479, y: 3.9959955, z: -0.06472415}
