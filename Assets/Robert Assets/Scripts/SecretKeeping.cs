@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CrateBehaviour : MonoBehaviour
+public class SecretKeeping : MonoBehaviour
 {
     public GameObject hiddenSecret;
     public bool secretKeeper;
@@ -11,10 +11,10 @@ public class CrateBehaviour : MonoBehaviour
     {
         if (collider.gameObject.name == "Player") // TODO: Change to name == Arrow
         {
-            GameVariables.crateDestroys++;
+            GameVariables.enemyKills++;
             Destroy(gameObject);
 
-            if (secretKeeper)
+            if (GameVariables.enemyKills % 5 == 0)
             {
                 Instantiate(hiddenSecret, gameObject.transform.position, Quaternion.identity);
             }

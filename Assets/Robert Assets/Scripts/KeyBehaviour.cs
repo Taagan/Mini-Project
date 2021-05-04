@@ -6,9 +6,9 @@ public class KeyBehaviour : MonoBehaviour
 {
     private void OnTriggerEnter(Collider collider)
     {
-        if (collider.gameObject.name == "Player")
+        if (collider.gameObject.name == "Player" || collider.gameObject.name == "Arrow")
         {
-            GameVariables.keyCount += 1;
+            GameVariables.keysInventory += 1;
             Destroy(gameObject);
         }
     }
