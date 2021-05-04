@@ -19718,6 +19718,7 @@ MonoBehaviour:
   minion: {fileID: 8768999928453528631, guid: 96f9ec31d78bd454e95cddb17143c5f5, type: 3}
   sword: {fileID: 6369162590743150504}
   rb: {fileID: 8749466324012540687}
+  animator: {fileID: 4780129599368914943}
   maxStamina: 100
   restingAmountStamina: 100
   restingRateStamina: 0.4
@@ -22142,7 +22143,7 @@ Animator:
   m_GameObject: {fileID: 4780129599359521859}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: a58d63122b09e9144938cd6a1ece4824, type: 3}
-  m_Controller: {fileID: 9100000, guid: b60dc9aa529b314489f628aa3b57c470, type: 2}
+  m_Controller: {fileID: 9100000, guid: 24fcfe354d52fb146a850e360fa27f2e, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
