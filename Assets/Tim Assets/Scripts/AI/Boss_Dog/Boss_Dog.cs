@@ -64,7 +64,7 @@ public class Boss_Dog : Enemy
     public void FixedUpdate()
     {
         baseNode.Execute();
-        staminaSlider.value = stamina / maxStamina;
+        //staminaSlider.value = stamina / maxStamina;
     }
 
     public override void Attack()
@@ -91,6 +91,7 @@ public class Boss_Dog : Enemy
 
     private void Phase_I()
     {
+        Debug.Log("in phase 1");
         navMeshAgent.isStopped = false;
         navMeshAgent.SetDestination(player.transform.position);
         sword.transform.Rotate(new Vector3(0, 10, 0));

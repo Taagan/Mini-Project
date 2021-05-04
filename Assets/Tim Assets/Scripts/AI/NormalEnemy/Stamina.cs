@@ -11,7 +11,7 @@ public class Stamina : Node
     {
         if (enemy.Stamina > 0 && !enemy.Resting)
         {
-            Debug.Log("not resting");
+            //Debug.Log("not resting");
             return NodeState.Success;
         }
         else if (!enemy.Resting)
