@@ -62,7 +62,7 @@ public class NormalEnemy : Enemy
     public void FixedUpdate()
     {
         baseNode.Execute();
-        staminaSlider.value = stamina / maxStamina;
+        //staminaSlider.value = stamina / maxStamina;
         //Debug.Log(stamina);
     }
 
@@ -156,4 +156,5 @@ public class NormalEnemy : Enemy
         this.stamina = stamina;
         this.courage = courage;
     }
+
 }

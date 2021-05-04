@@ -3819,6 +3819,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 6683822523485681158, guid: 78866263af037934da1310fdad563e09, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 78866263af037934da1310fdad563e09, type: 3}
 --- !u!1001 &324727983
@@ -19710,7 +19714,7 @@ MonoBehaviour:
   courage: 1
   resting: 0
   currentPhase: 0
-  magicMissle: {fileID: 8567030208884491470, guid: ead36334088f17742a8ac1cca1a6a0c0, type: 3}
+  magicMissle: {fileID: 3451227485525097665, guid: c6a6d54d3b9cde345b071a5b821e1ef1, type: 3}
   minion: {fileID: 8768999928453528631, guid: 96f9ec31d78bd454e95cddb17143c5f5, type: 3}
   sword: {fileID: 6369162590743150504}
   rb: {fileID: 8749466324012540687}
