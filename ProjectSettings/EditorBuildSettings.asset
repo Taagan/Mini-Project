@@ -9,12 +9,18 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: 07c7f43556b98a64e860705631cb2f7f
   - enabled: 1
-    path: Assets/Scenes/Scenes_Joakim/Ossians_testscen.unity
+    path: Assets/Scenes/Joakim_Scene.unity
+    guid: 1f65ea0397d013a4bb2cab1f336d6389
+  - enabled: 1
+    path: Assets/Scenes/Ossians_testscen.unity
     guid: c30a0f334547b874c8bf031d8f3072a9
   - enabled: 1
-    path: Assets/Scenes/Scenes_Joakim/SampleScene.unity
-    guid: 9fc0d4010bbf28b4594072e72b8655ab
+    path: Assets/Scenes/Roberts_Scene.unity
+    guid: 67210e6388c06784f9c42e746e7bccca
   - enabled: 1
     path: Assets/Scenes/Tobias_Scene.unity
-    guid: a26725845ad901d4b9b5f7d4387caaff
+    guid: fc8fd15eeee56574dad2d805b5f33354
+  - enabled: 1
+    path: Assets/Scenes/Tim_Scene.unity
+    guid: d18e5bcd118421743b7dcbd27e54a839
   m_configObjects: {}

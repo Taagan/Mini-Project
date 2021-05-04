@@ -18,9 +18,11 @@ public class MenuEvents : MonoBehaviour
     [SerializeField] private Button m_BackToMainButton;
 
     [Space(3), Header("Levels")]
-    [SerializeField] private Button m_SampleButton;
-    [SerializeField] private Button m_TobiasButton;
+    [SerializeField] private Button m_JoakimButton;
     [SerializeField] private Button m_OssianButton;
+    [SerializeField] private Button m_RobertButton;
+    [SerializeField] private Button m_TobiasButton;
+    [SerializeField] private Button m_TimButton;
 
     private GameObject m_CurrentMenu;
 
@@ -31,9 +33,11 @@ public class MenuEvents : MonoBehaviour
         m_QuitGameButton.onClick.AddListener(QuitGame);
         m_BackToMainButton.onClick.AddListener(BackToMenu);
 
-        m_SampleButton.onClick.AddListener(LoadSample);
-        m_TobiasButton.onClick.AddListener(LoadTobias);
+        m_JoakimButton.onClick.AddListener(LoadJoakim);
         m_OssianButton.onClick.AddListener(LoadOssian);
+        m_RobertButton.onClick.AddListener(LoadRobert);
+        m_TobiasButton.onClick.AddListener(LoadTobias);
+        m_TimButton.onClick.AddListener(LoadTim);
     }
 
     #region ButtonEvents
@@ -69,17 +73,25 @@ public class MenuEvents : MonoBehaviour
 
     #region LoadScenes
 
-    public void LoadSample()
+    public void LoadJoakim()
     {
-        SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene("Joakim_Scene");
+    }
+    public void LoadOssian()
+    {
+        SceneManager.LoadScene("Ossians_testscen");
+    }
+    public void LoadRobert()
+    {
+        SceneManager.LoadScene("Roberts_Scene");
     }
     public void LoadTobias()
     {
         SceneManager.LoadScene("Tobias_Scene");
     }
-    public void LoadOssian()
+    public void LoadTim()
     {
-        SceneManager.LoadScene("Ossians_testscen");
+        SceneManager.LoadScene("Tim_Scene");
     }
 
     #endregion
