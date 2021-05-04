@@ -55,6 +55,7 @@ public class NormalEnemy : Enemy
     private void Start()
     {
         navMeshAgent.speed = speed;
+        player = GameObject.FindGameObjectWithTag("Player");
     }
 
 
@@ -92,24 +93,27 @@ public class NormalEnemy : Enemy
 
     public override void Flee()
     {
-        rb.velocity = Vector3.zero;
-        float moveSpeed = speed * Time.deltaTime;
 
-        //Do flee behaviour
-        Vector3 targetDir = player.transform.position - transform.position;
+        navMeshAgent.SetDestination(player.transform.position);
 
-        Vector3 newDir = Vector3.RotateTowards(transform.forward, -targetDir, moveSpeed, 0.0f);
+        //rb.velocity = Vector3.zero;
+        //float moveSpeed = speed * Time.deltaTime;
 
-        Debug.DrawRay(transform.position, newDir, Color.red);
+        ////Do flee behaviour
+        //Vector3 targetDir = player.transform.position - transform.position;
 
-        transform.rotation = Quaternion.LookRotation(newDir);
+        //Vector3 newDir = Vector3.RotateTowards(transform.forward, -targetDir, moveSpeed, 0.0f);
 
-        rb.velocity = transform.forward * moveSpeed;
+        //Debug.DrawRay(transform.position, newDir, Color.red);
 
-        stamina -= fleeRateStamina;
+        //transform.rotation = Quaternion.LookRotation(newDir);
+
+        //rb.velocity = transform.forward * moveSpeed;
+
+        //stamina -= fleeRateStamina;
 
 
-        Debug.Log("Fleeing");
+        //Debug.Log("Fleeing");
     }
 
     public override void Idle()
