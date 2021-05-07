@@ -52,8 +52,21 @@ public class PlayerMovementInputController : MonoBehaviour
 
     private void Update()
     {
+        #region Player Based Rotation
+        
+        //Move the player based on the X input on the controller
+        //transform.rotation *= Quaternion.AngleAxis(_look.x * rotationPower, Vector3.up);
+
+        #endregion
+
+        #region Follow Transform Rotation
+
+        //Rotate the Follow Target transform based on the input
         followTransform.transform.rotation *= Quaternion.AngleAxis(_look.x * rotationPower, Vector3.up);
 
+        #endregion
+
+        #region Vertical Rotation
         followTransform.transform.rotation *= Quaternion.AngleAxis(_look.y * rotationPower, Vector3.right);
 
         var angles = followTransform.transform.localEulerAngles;
@@ -73,7 +86,9 @@ public class PlayerMovementInputController : MonoBehaviour
 
 
         followTransform.transform.localEulerAngles = angles;
-       
+        #endregion
+
+        
         nextRotation = Quaternion.Lerp(followTransform.transform.rotation, nextRotation, Time.deltaTime * rotationLerp);
 
         if (_move.x == 0 && _move.y == 0) 

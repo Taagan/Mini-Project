@@ -68,18 +68,15 @@ public class PlayerLocomotionController : MonoBehaviour
                 arrow.SetActive(true);
             }
 
-            _movement.fireValue = 0f;
+         
 
             
+            _movement.fireValue = 0f;
         }
         _animator.SetBool("IsAiming", isAiming);
         _animator.SetBool("IsMoving", shouldMove);
         _animator.SetFloat("VelocityX", velocity.x);
         _animator.SetFloat("VelocityY", Mathf.Abs(velocity.y));
-    }
-
-    private void Aiming()
-    {
 
     }
 
