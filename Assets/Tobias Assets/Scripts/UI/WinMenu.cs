@@ -4,7 +4,7 @@ using UnityEngine.UI;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
-public class GameOverMenu : MonoBehaviour
+public class WinMenu : MonoBehaviour
 {
     [Space(3), Header("Options Buttons")]
     [SerializeField] private Button m_RestartButton = null;
@@ -12,13 +12,11 @@ public class GameOverMenu : MonoBehaviour
 
     [Space(3), Header("UI Items")]
     [SerializeField] private GameObject m_HUD = null;
-    [SerializeField] private GameObject m_Confirm = null;
     [SerializeField] private GameObject m_Options = null;
 
     [Space(3), Header("Other")]
     [SerializeField] private float m_FadeInSpeed = 0.45f;
 
-    private ConfirmMenu m_ConfirmMenu;
     private CanvasGroup m_OptionsCanvasGroup;
 
     private bool m_CoroutineIsRunning;
@@ -28,7 +26,6 @@ public class GameOverMenu : MonoBehaviour
         m_RestartButton.onClick.AddListener(Restart);
         m_MainMenuButton.onClick.AddListener(OpenMainMenu);
 
-        m_ConfirmMenu = m_Confirm.GetComponent<ConfirmMenu>();
         m_OptionsCanvasGroup = m_Options.GetComponent<CanvasGroup>();
 
         m_CoroutineIsRunning = false;
@@ -36,7 +33,7 @@ public class GameOverMenu : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P))
+        if (Input.GetKeyDown(KeyCode.O))
         {
             if (!m_CoroutineIsRunning)
             {
@@ -65,35 +62,11 @@ public class GameOverMenu : MonoBehaviour
 
     private void Restart()
     {
-        m_Confirm.SetActive(true);
-        m_Options.SetActive(false);
-
-        m_ConfirmMenu.YesAction(new UnityAction(() =>
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        }));
-
-        m_ConfirmMenu.NoAction(new UnityAction(() =>
-        {
-            m_Confirm.SetActive(false);
-            m_Options.SetActive(true);
-        }));
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public void OpenMainMenu()
     {
-        m_Confirm.SetActive(true);
-        m_Options.SetActive(false);
-
-        m_ConfirmMenu.YesAction(new UnityAction(() =>
-        {
-            SceneManager.LoadScene("MainMenu");
-        }));
-
-        m_ConfirmMenu.NoAction(new UnityAction(() =>
-        {
-            m_Confirm.SetActive(false);
-            m_Options.SetActive(true);
-        }));
+        SceneManager.LoadScene("MainMenu");
     }
 }

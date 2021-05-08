@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class SaveAssetPreviewToImage : MonoBehaviour
 {
+#if UNITY_EDITOR
     [Space(3)]
     [SerializeField] private bool m_Save = false;
 
@@ -25,5 +26,6 @@ public class SaveAssetPreviewToImage : MonoBehaviour
 
             m_Save = false;
         }
-    }   
+    }
+#endif
 }

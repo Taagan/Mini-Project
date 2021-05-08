@@ -28,4 +28,21 @@ public class Sound
     public float Pitch => m_Pitch;
 
     public bool Loop => m_Loop;
+
+    public Sound(string name, AudioClip clip, AudioMixerGroup output, float volume = 1.0f, float pitch = 1.0f, bool loop = false)
+    {
+        m_Name = name;
+        m_Clip = clip;
+        m_Output = output;
+        m_Volume = volume;
+        m_Pitch = pitch;
+        m_Loop = loop;
+    }
+
+    public Sound(string name, AudioSource source) 
+        : this(name, source.clip, source.outputAudioMixerGroup, 
+               source.volume, source.pitch, source.loop)
+    {
+        this.source = source;
+    }
 }

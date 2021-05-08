@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7219262669275543706}
-  - component: {fileID: 7219262669275543705}
+  - component: {fileID: 6733606257859467163}
   m_Layer: 0
   m_Name: AudioManager
   m_TagString: Untagged
@@ -31,7 +31,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7219262669275543705
+--- !u!114 &6733606257859467163
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -44,10 +44,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_GameSounds:
-  - m_Name: Checkpoint
+  - source: {fileID: 0}
+    m_Name: error
+    m_Clip: {fileID: 8300000, guid: 9ca961f7ee588714fb7e16bb6520a820, type: 3}
+    m_Output: {fileID: 243448761005511180, guid: 115965ff544e6604aae2a7d1fbd95e99, type: 2}
+    m_Volume: 0.7
+    m_Pitch: 1
+    m_Loop: 0
+  - source: {fileID: 0}
+    m_Name: checkpoint
     m_Clip: {fileID: 8300000, guid: 14ff5aad1f191f94eae61a34b9d3e1d6, type: 3}
     m_Output: {fileID: 243448761005511180, guid: 115965ff544e6604aae2a7d1fbd95e99, type: 2}
     m_Volume: 1
     m_Pitch: 1
     m_Loop: 0
-    source: {fileID: 0}

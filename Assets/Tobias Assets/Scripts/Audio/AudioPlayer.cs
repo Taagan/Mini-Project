@@ -2,7 +2,7 @@ using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AudioManager : MonoBehaviour
+public class AudioPlayer : MonoBehaviour
 {
     [SerializeField] private Sound[] m_GameSounds;
 
@@ -57,7 +57,7 @@ public class AudioManager : MonoBehaviour
     /// </summary>
     public static AudioSource AddSpatialAudioSource(GameObject gameObject, string name, float spatialBlend = 1.0f)
     {
-        // Add Audio Source to gameobject to use 3D audio
+        // add Audio Source to gameobject to use 3D audio
         AudioSource audioSource = gameObject.AddComponent<AudioSource>();
 
         SetAudioSource(audioSource, GetSound(name));
@@ -69,7 +69,7 @@ public class AudioManager : MonoBehaviour
     /// <summary>
     /// play a sound at point
     /// </summary>
-    public static void PlayAtPoint(Vector3 position, string name, float spatialBlend = 1.0f)
+    public static void PlayAtPoint(string name, Vector3 position, float spatialBlend = 1.0f)
     {
         // Create new empty object at position
         GameObject soundObject = new GameObject();
@@ -91,11 +91,11 @@ public class AudioManager : MonoBehaviour
     /// <summary>
     /// play a sound at point with no overlap allowed
     /// </summary>
-    public static void PlaySeperatedAtPoint(Vector3 position, string name, float spatialBlend = 1.0f)
+    public static void PlaySeperatedAtPoint(string name, Vector3 position, float spatialBlend = 1.0f)
     {
         Sound sound = GetSound(name);
 
-        if (GameObject.Find(sound.ID))
+        if (GameObject.Find(sound.ID)) // if object exists means the sound is already playing
             return;
 
         // Create new empty object at position
@@ -115,12 +115,30 @@ public class AudioManager : MonoBehaviour
         Destroy(audioObject, audioSource.clip.length);
     }
 
+    /// <summary>
+    /// add custom sound to be played using audioplayer 
+    /// </summary>
+    public static Sound AddSound(string name, AudioSource source)
+    {
+        Sound sound = new Sound(name, source);
+        m_Sounds.Add(name, sound);
+        return sound;
+    }
+
+    /// <summary>
+    /// set custom audio source for sound
+    /// </summary>
+    public static void SetSound(string name, AudioSource source)
+    {
+        GetSound(name).source = source;
+    }
+
     public static Sound GetSound(string name)
     {
         if (!m_Sounds.ContainsKey(name))
         {
-            Debug.LogWarning(name + " does not exist in dictionary");
-            return null;
+            Debug.LogWarning(name + " does not exist; check spelling");
+            return m_Sounds["error"];
         }
 
         return m_Sounds[name];

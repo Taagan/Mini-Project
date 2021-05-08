@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: 07c7f43556b98a64e860705631cb2f7f
   - enabled: 1
+    path: Assets/Scenes/ossians_bana1.unity
+    guid: 2ae630008b884d849bbd0c2460178f35
+  - enabled: 1
     path: Assets/Scenes/Joakim_Scene.unity
     guid: 1f65ea0397d013a4bb2cab1f336d6389
   - enabled: 1
