@@ -33,24 +33,24 @@ public class Boss_Dog : Enemy
     {
         baseNode = new SelectorNode(this);
 
-        SequenceNode active = new SequenceNode(this);
+        SequenceNode activeSeq = new SequenceNode(this);
         IdleNode idle = new IdleNode(this);
 
         PlayerInArena playerInArena = new PlayerInArena(this);
         Stamina staminaCheck = new Stamina(this);
         SelectorNode phaseSelector = new SelectorNode(this);
-
+        
         Phase_I phase_I = new Phase_I(this);
         Phase_II phase_II = new Phase_II(this);
         Phase_III phase_III = new Phase_III(this);
         Phase_IV phase_IV = new Phase_IV(this);
 
-        baseNode.AddChild(active);
+        baseNode.AddChild(activeSeq);
         baseNode.AddChild(idle);
 
-        active.AddChild(playerInArena);
-        active.AddChild(staminaCheck);
-        active.AddChild(phaseSelector);
+        activeSeq.AddChild(playerInArena);
+        activeSeq.AddChild(staminaCheck);
+        activeSeq.AddChild(phaseSelector);
 
         phaseSelector.AddChild(phase_I);
         phaseSelector.AddChild(phase_II);
@@ -70,7 +70,6 @@ public class Boss_Dog : Enemy
     public void FixedUpdate()
     {
         baseNode.Execute();
-        //staminaSlider.value = stamina / maxStamina;
     }
 
     public override void Attack()
@@ -240,31 +239,5 @@ public class Boss_Dog : Enemy
                 charging = false;
             }
         }
-    }
-
-
-
-    private void LookAtPlayer()
-    {
-        Vector3 targetDir = player.transform.position - transform.position;
-
-        Vector3 newDir = Vector3.RotateTowards(transform.forward, targetDir, 1000, 0.0f);
-
-        Debug.DrawRay(transform.position, newDir, Color.red);
-
-        transform.rotation = Quaternion.LookRotation(newDir);
-    }
-
-
-    [SerializeField]
-    public void UpdateStats(GameObject player, int maxHp, int speed, int atkDamage, int aggroRange, int stamina, float courage)
-    {
-        this.player = player;
-        this.maxHp = maxHp;
-        this.speed = speed;
-        this.atkDamage = atkDamage;
-        this.aggroRange = aggroRange;
-        this.stamina = stamina;
-        this.courage = courage;
     }
 }

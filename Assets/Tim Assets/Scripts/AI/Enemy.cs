@@ -49,4 +49,17 @@ public class Enemy : MonoBehaviour
 
     public virtual void Idle() { }
 
+
+
+    protected void LookAtPlayer()
+    {
+        Vector3 targetDir = player.transform.position - transform.position;
+
+        Vector3 newDir = Vector3.RotateTowards(transform.forward, targetDir, 1000, 0.0f);
+
+        Debug.DrawRay(transform.position, newDir, Color.red);
+
+        transform.rotation = Quaternion.LookRotation(newDir);
+    }
+
 }
