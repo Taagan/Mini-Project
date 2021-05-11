@@ -63,7 +63,7 @@ MonoBehaviour:
     m_Name: checkpoint
     m_Clip: {fileID: 8300000, guid: 60b6f9a2c9d1b5a4799b2c00f1aa390b, type: 3}
     m_Output: {fileID: 243448761005511180, guid: 115965ff544e6604aae2a7d1fbd95e99, type: 2}
-    m_Volume: 0.3
+    m_Volume: 0.2
     m_Pitch: 1
     m_Loop: 0
   - source: {fileID: 0}
@@ -98,62 +98,62 @@ MonoBehaviour:
     m_Name: battle_01
     m_Clip: {fileID: 8300000, guid: ebbe532f4a5a539408c61303900941b6, type: 3}
     m_Output: {fileID: 243344223906838914, guid: 115965ff544e6604aae2a7d1fbd95e99, type: 2}
-    m_Volume: 0.1
+    m_Volume: 0.2
     m_Pitch: 1
     m_Loop: 1
   - source: {fileID: 0}
     m_Name: battle_02
     m_Clip: {fileID: 8300000, guid: 457a73bd89831354ead47892bbafbb78, type: 3}
     m_Output: {fileID: 243344223906838914, guid: 115965ff544e6604aae2a7d1fbd95e99, type: 2}
-    m_Volume: 0.1
+    m_Volume: 0.2
     m_Pitch: 1
     m_Loop: 1
   - source: {fileID: 0}
     m_Name: battle_03
     m_Clip: {fileID: 8300000, guid: 94f2a5798b2af044a98815ed906219c4, type: 3}
     m_Output: {fileID: 243344223906838914, guid: 115965ff544e6604aae2a7d1fbd95e99, type: 2}
-    m_Volume: 0.1
+    m_Volume: 0.2
     m_Pitch: 1
     m_Loop: 1
   - source: {fileID: 0}
     m_Name: battle_04
     m_Clip: {fileID: 8300000, guid: 803b9a3be0b1f614baf86c7d53a7a83d, type: 3}
     m_Output: {fileID: 243344223906838914, guid: 115965ff544e6604aae2a7d1fbd95e99, type: 2}
-    m_Volume: 0.1
+    m_Volume: 0.2
     m_Pitch: 1
     m_Loop: 1
   - source: {fileID: 0}
     m_Name: calm_01
     m_Clip: {fileID: 8300000, guid: 5ff7e0d95ddcc554f9a9b1a48fb2bc6c, type: 3}
     m_Output: {fileID: 243344223906838914, guid: 115965ff544e6604aae2a7d1fbd95e99, type: 2}
-    m_Volume: 0.1
+    m_Volume: 0.2
     m_Pitch: 1
     m_Loop: 1
   - source: {fileID: 0}
     m_Name: calm_02
     m_Clip: {fileID: 8300000, guid: 10c663c31377069498920d7ea64340bf, type: 3}
     m_Output: {fileID: 243344223906838914, guid: 115965ff544e6604aae2a7d1fbd95e99, type: 2}
-    m_Volume: 0.1
+    m_Volume: 0.2
     m_Pitch: 1
     m_Loop: 1
   - source: {fileID: 0}
     m_Name: normal_01
     m_Clip: {fileID: 8300000, guid: b1cb78befe7f7754ab2b9666e0f6c68e, type: 3}
     m_Output: {fileID: 243344223906838914, guid: 115965ff544e6604aae2a7d1fbd95e99, type: 2}
-    m_Volume: 0.1
+    m_Volume: 0.2
     m_Pitch: 1
     m_Loop: 1
   - source: {fileID: 0}
     m_Name: normal_02
     m_Clip: {fileID: 8300000, guid: 81405433183578c41b45b21fa19d2f10, type: 3}
     m_Output: {fileID: 243344223906838914, guid: 115965ff544e6604aae2a7d1fbd95e99, type: 2}
-    m_Volume: 0.1
+    m_Volume: 0.2
     m_Pitch: 1
     m_Loop: 1
   - source: {fileID: 0}
     m_Name: normal_03
     m_Clip: {fileID: 8300000, guid: 91f3a6ca9bbc3874d8a52ea1cc2bf0dc, type: 3}
     m_Output: {fileID: 243344223906838914, guid: 115965ff544e6604aae2a7d1fbd95e99, type: 2}
-    m_Volume: 0.1
+    m_Volume: 0.2
     m_Pitch: 1
     m_Loop: 1

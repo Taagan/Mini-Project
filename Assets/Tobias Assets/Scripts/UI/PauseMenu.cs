@@ -59,10 +59,10 @@ public class PauseMenu : MonoBehaviour
 
         m_ConfirmMenu.YesAction(new UnityAction(() =>
         {
-            m_Confirm.SetActive(false);
-
             CheckpointManager.LoadCheckpoint();
             TogglePause();
+
+            m_Confirm.SetActive(false);
         }));
 
         m_ConfirmMenu.NoAction(new UnityAction(() =>

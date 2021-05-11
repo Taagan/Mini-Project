@@ -13,11 +13,11 @@ public class PlayerHUD : MonoBehaviour
     [SerializeField] private Text m_KeysText;
 
     [Space(3), Header("Player")]
-    [SerializeField] private GameObject m_Placeholder;
+    [SerializeField] private Health m_PlayerHealth;
 
     private void Start()
     {
-        
+        m_PlayerHealth = GameObject.FindGameObjectWithTag("Player").GetComponent<Health>();
     }
 
     private void LateUpdate()

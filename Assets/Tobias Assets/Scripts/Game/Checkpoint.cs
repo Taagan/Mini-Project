@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class CheckpointCollision : MonoBehaviour
+public class Checkpoint : MonoBehaviour
 {
     [SerializeField, Tooltip("Spawn Position relative to transform")]
     private Vector3 m_SpawnPosition = Vector3.up;

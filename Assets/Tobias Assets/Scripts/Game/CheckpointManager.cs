@@ -3,20 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// manages save and load of checkpoints 
+/// manages save and load for checkpoints 
 /// </summary>
 public class CheckpointManager : MonoBehaviour
 {
-    public static CheckpointCollision Checkpoint { get; private set; } = null;
+    public static Checkpoint Checkpoint { get; private set; } = null;
 
     public static Vector3 Position { get; set; }
     public static Vector3 Rotation { get; set; }
 
 
-    public static bool SaveCheckpoint(CheckpointCollision cpColl, Vector3 position, Vector3 rotation)
+    public static bool SaveCheckpoint(Checkpoint checkpoint, Vector3 position, Vector3 rotation)
     {
         if (Checkpoint != null &&
-            Checkpoint == cpColl) return false;
+            Checkpoint == checkpoint) return false;
 
         Position = position;
         Rotation = rotation;
@@ -27,10 +27,10 @@ public class CheckpointManager : MonoBehaviour
             Checkpoint.SetColor();
         }
 
-        cpColl.IsFlagged = true;
-        cpColl.SetColor();
+        checkpoint.IsFlagged = true;
+        checkpoint.SetColor();
 
-        Checkpoint = cpColl;
+        Checkpoint = checkpoint;
 
         return true;
     }

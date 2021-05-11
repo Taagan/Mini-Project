@@ -969,6 +969,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2740031944261176881, guid: 02884e65681984b4e98a045963be1052, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2740031944261176881, guid: 02884e65681984b4e98a045963be1052, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2740031944819611283, guid: 02884e65681984b4e98a045963be1052, type: 3}
       propertyPath: m_Name
       value: UI Canvas
