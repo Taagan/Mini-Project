@@ -27,7 +27,7 @@
                     "id": "1d435462-6d19-4d34-a7b4-ce4343535da3",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "Press(behavior=2)"
+                    "interactions": "Press(pressPoint=0.1,behavior=2)"
                 },
                 {
                     "name": "Aim",
@@ -56,7 +56,7 @@
                     "path": "<Keyboard>/w",
                     "interactions": "",
                     "processors": "",
-                    "groups": ";Keyboard&Mouse",
+                    "groups": "Keyboard&Mouse",
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true

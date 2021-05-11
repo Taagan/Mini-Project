@@ -1,5 +1,7 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.AI;
 
 public class AnimationMovementController : MonoBehaviour
 {
@@ -9,13 +11,29 @@ public class AnimationMovementController : MonoBehaviour
     private Vector2 smoothDeltaPos = Vector2.zero;
     public Vector2 velocity = Vector2.zero;
     public float magnitude = 0.25f;
-    public bool moving;
 
+    public AudioSource arrowSound;
+
+    private void Start()
+    {
+        arrowSound = GetComponent<AudioSource>();
+    }
     private void OnEnable()
     {
         movement = GetComponent<MovementInputController>();
         animator = GetComponent<Animator>();
     }
+
+    public bool moving;
+    public bool shouldTurn;
+    public float turn;
+
+    public GameObject look;
+
+    public GameObject arrow;
+
+    public Transform arrowBone;
+    public GameObject arrowPrefab;
 
     void Update()
     {
@@ -34,36 +52,57 @@ public class AnimationMovementController : MonoBehaviour
         }
 
         moving = velocity.magnitude > magnitude;
-
         bool isAiming = (movement.aimInput == 1f);
-        bool fire = (movement.fireInput == 1f);
+
 
         if (isAiming)
         {
-            if (fire)
+            if ((movement.fireInput == 1f))
             {
                 animator.SetTrigger("Fire");
-                //Skjut pil-metod
+                arrow.SetActive(false);
+                StartCoroutine(FireArrow());
             }
+
+
             if (animator.GetCurrentAnimatorStateInfo(2).IsName("Fire"))
             {
-                //Avaktivera någon form av projektil
+                arrow.SetActive(false);
             }
             else
             {
-                //aktivera pil
+                arrow.SetActive(true);
             }
+
+            movement.fireInput = 0f;
         }
 
-        animator.SetBool("Aiming", isAiming);
-        animator.SetBool("Moving", moving);
+        animator.SetBool("IsAiming", isAiming);
+        animator.SetBool("IsMoving", moving);
         animator.SetFloat("VelocityX", velocity.x);
         animator.SetFloat("VelocityY", Mathf.Abs(velocity.y));
+
+      
+        
     }
 
     private void OnAnimatorMove()
     {
         transform.position = movement.nextPosition;
+    }
+
+    [SerializeField]
+    private Transform fireTransform;
+
+    IEnumerator FireArrow()
+    {
+        GameObject projectile = Instantiate(arrowPrefab);
+        projectile.transform.forward = look.transform.forward;
+        projectile.transform.position = fireTransform.position + fireTransform.forward;
+        yield return new WaitForSeconds(0.1f);
+        arrowSound.Play();
+        projectile.GetComponent<ArrowProjectile>().Fire();
+
     }
 
 

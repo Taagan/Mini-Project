@@ -9,7 +9,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: Aiming
+    m_ConditionEvent: IsAiming
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 8221565221787521028}
@@ -53,7 +53,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: Aiming
+    m_ConditionEvent: IsAiming
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 8221565221787521028}
@@ -205,7 +205,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Archer
+  m_Name: Archer 1
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: IsDead
@@ -226,7 +226,7 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 9100000}
-  - m_Name: Moving
+  - m_Name: IsMoving
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
@@ -250,7 +250,7 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 9100000}
-  - m_Name: Aiming
+  - m_Name: IsAiming
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
@@ -290,7 +290,7 @@ AnimatorController:
   - serializedVersion: 5
     m_Name: Legs
     m_StateMachine: {fileID: 4013268107709052187}
-    m_Mask: {fileID: 31900000, guid: b04d800114bb4dd42b1be10532a96a98, type: 2}
+    m_Mask: {fileID: 31900000, guid: 2b6b2f87c8794db4f8e00f4f7b78fa78, type: 2}
     m_Motions:
     - serializedVersion: 2
       m_State: {fileID: 1102649667626253162}
@@ -305,7 +305,7 @@ AnimatorController:
   - serializedVersion: 5
     m_Name: Upper Mask
     m_StateMachine: {fileID: 3627446245236560287}
-    m_Mask: {fileID: 31900000, guid: 81c7499113844f14d990e24b923eab71, type: 2}
+    m_Mask: {fileID: 31900000, guid: 2108422105892ff40bc9782917033f71, type: 2}
     m_Motions:
     - serializedVersion: 2
       m_State: {fileID: 8221565221787521028}
@@ -357,7 +357,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 2
-    m_ConditionEvent: Aiming
+    m_ConditionEvent: IsAiming
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1234240624275044031}
@@ -407,7 +407,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 2
-    m_ConditionEvent: Moving
+    m_ConditionEvent: IsMoving
     m_EventTreshold: 0.01
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1102140383390358998}
@@ -479,7 +479,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: Moving
+    m_ConditionEvent: IsMoving
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1102649667626253162}
@@ -613,10 +613,10 @@ AnimatorStateMachine:
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: 1102140383390358998}
-    m_Position: {x: 290, y: 320, z: 0}
+    m_Position: {x: 288, y: 324, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102649667626253162}
-    m_Position: {x: 290, y: 570, z: 0}
+    m_Position: {x: 290, y: 440, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102151025048529808}
     m_Position: {x: 280, y: 150, z: 0}
@@ -765,7 +765,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 2
-    m_ConditionEvent: Aiming
+    m_ConditionEvent: IsAiming
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1234240624275044031}

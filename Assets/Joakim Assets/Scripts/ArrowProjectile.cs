@@ -21,9 +21,9 @@ public class ArrowProjectile : MonoBehaviour
         source.GenerateImpulse(Camera.main.transform.forward);
     }
 
-    public void OnCollisionEnter(Collision collision)
+    public void OnCollisionEnter(Collision other)
     {
-        if (collision.gameObject.name != "Player")
+        if (other.gameObject.name != "Player")
         {
             rigidbody.isKinematic = true;
             StartCoroutine(Countdown());
@@ -32,7 +32,7 @@ public class ArrowProjectile : MonoBehaviour
 
     IEnumerator Countdown()
     {
-        yield return new WaitForSeconds(10);
+        yield return new WaitForSeconds(5);
         Destroy(gameObject);
     }
 

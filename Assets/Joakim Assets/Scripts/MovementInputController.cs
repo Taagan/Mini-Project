@@ -46,6 +46,7 @@ public class MovementInputController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
 
     }
+
     private void Update()
     {
         followTransform.transform.rotation *= Quaternion.AngleAxis(look.x * rotationPower, Vector3.up);
@@ -88,6 +89,5 @@ public class MovementInputController : MonoBehaviour
         transform.rotation = Quaternion.Euler(0, followTransform.transform.rotation.eulerAngles.y, 0);
         followTransform.transform.localEulerAngles = new Vector3(angles.x, 0, 0);
     }
-
 
 }
