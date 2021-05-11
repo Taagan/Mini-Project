@@ -10,19 +10,15 @@ public class AnimationMovementController : MonoBehaviour
 
     private Vector2 smoothDeltaPos = Vector2.zero;
     public Vector2 velocity = Vector2.zero;
-    public float magnitude = 0.25f;
-
-    public AudioSource arrowSound;
-
+    public float magnitude = 0.4f;
     private void Start()
     {
         arrowSound = GetComponent<AudioSource>();
-    }
-    private void OnEnable()
-    {
         movement = GetComponent<MovementInputController>();
         animator = GetComponent<Animator>();
     }
+
+    public AudioSource arrowSound;
 
     public bool moving;
     public bool shouldTurn;
@@ -35,23 +31,28 @@ public class AnimationMovementController : MonoBehaviour
     public Transform arrowBone;
     public GameObject arrowPrefab;
 
-    void Update()
+ 
+   
+    public void Update()
     {
         Vector3 worldPosition = movement.nextPosition - transform.position;
 
+        //Map to local space
         float x = Vector3.Dot(transform.right, worldPosition);
         float y = Vector3.Dot(transform.forward, worldPosition);
         Vector2 deltaPosition = new Vector2(x, y);
 
-        float smoothing = Mathf.Min(1.0f, Time.deltaTime / 0.15f);
-        smoothDeltaPos = Vector2.Lerp(smoothDeltaPos, deltaPosition, smoothing);
-
+        float smooth = Mathf.Min(1.0f, Time.deltaTime / 0.15f);
+        smoothDeltaPos = Vector2.Lerp(smoothDeltaPos, deltaPosition, smooth);
+      
         if (Time.deltaTime > 1e-5f)
         {
             velocity = smoothDeltaPos / Time.deltaTime;
         }
 
+       
         moving = velocity.magnitude > magnitude;
+
         bool isAiming = (movement.aimInput == 1f);
 
 
@@ -79,11 +80,9 @@ public class AnimationMovementController : MonoBehaviour
 
         animator.SetBool("IsAiming", isAiming);
         animator.SetBool("IsMoving", moving);
+       
         animator.SetFloat("VelocityX", velocity.x);
-        animator.SetFloat("VelocityY", Mathf.Abs(velocity.y));
-
-      
-        
+        animator.SetFloat("VelocityY", Mathf.Abs(velocity.y));  
     }
 
     private void OnAnimatorMove()
