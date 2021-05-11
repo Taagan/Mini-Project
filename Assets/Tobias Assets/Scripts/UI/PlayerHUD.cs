@@ -7,19 +7,17 @@ using UnityEngine.Events;
 [ExecuteInEditMode]
 public class PlayerHUD : MonoBehaviour
 {
-    [Space(3), Header("Bars")]
+    [Space(3), Header("HUD Items")]
     [SerializeField] private Slider m_HealthBar;
-    [SerializeField] private Slider m_StaminaBar;
+    [SerializeField] private Image m_KeysImage;
+    [SerializeField] private Text m_KeysText;
 
-    [Space(3), Header("Player Properties")]
-    [SerializeField, Range(0, 100)] private float m_PlayerHealth;
-    [SerializeField, Range(1, 100)] private float m_PlayerMaxHealth;
-    [SerializeField, Range(0, 100)] private float m_PlayerStamina;
-    [SerializeField, Range(1, 100)] private float m_PlayerMaxStamina;
+    [Space(3), Header("Player")]
+    [SerializeField] private GameObject m_Placeholder;
 
     private void Start()
     {
-        // Get player properties here
+        
     }
 
     private void LateUpdate()
@@ -29,7 +27,6 @@ public class PlayerHUD : MonoBehaviour
 
     public void Notify()
     {
-        m_HealthBar.value = m_PlayerHealth / m_PlayerMaxHealth;
-        m_StaminaBar.value = m_PlayerStamina / m_PlayerMaxStamina;
+        m_KeysText.text = GameVariables.keysInventory.ToString();
     }
 }
