@@ -10,8 +10,8 @@ public class AnimationMovementController : MonoBehaviour
 
     private Vector2 smoothDeltaPos = Vector2.zero;
     public Vector2 velocity = Vector2.zero;
-    public float magnitude = 0.4f;
-    private void Start()
+    public float magnitude = 0.25f;
+    private void OnEnable()
     {
         arrowSound = GetComponent<AudioSource>();
         movement = GetComponent<MovementInputController>();
@@ -80,7 +80,6 @@ public class AnimationMovementController : MonoBehaviour
 
         animator.SetBool("IsAiming", isAiming);
         animator.SetBool("IsMoving", moving);
-       
         animator.SetFloat("VelocityX", velocity.x);
         animator.SetFloat("VelocityY", Mathf.Abs(velocity.y));  
     }
