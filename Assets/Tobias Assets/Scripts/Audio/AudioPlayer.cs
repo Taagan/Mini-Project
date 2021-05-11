@@ -1,15 +1,35 @@
 using System.Linq;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// is used to store and easily play different kinds of sounds
+/// </summary>
 public class AudioPlayer : MonoBehaviour
 {
-    [SerializeField] private Sound[] m_GameSounds;
+    [SerializeField, Space(3), Tooltip("Which sound to play at start of scene from game sounds")] 
+    private string m_StartMusic;
+
+    [SerializeField, Space(5)] 
+    private Sound[] m_GameSounds;
 
     private static Dictionary<string, Sound> m_Sounds;
 
+    private static AudioPlayer Instance { get; set; } = null;
+
     private void Awake()
     {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
+
         foreach (Sound sound in m_GameSounds)
         {
             sound.source = gameObject.AddComponent<AudioSource>();
@@ -21,7 +41,7 @@ public class AudioPlayer : MonoBehaviour
 
     private void Start()
     {
-
+        Play(m_StartMusic);
     }
 
     /// <summary>
@@ -67,19 +87,21 @@ public class AudioPlayer : MonoBehaviour
     }
 
     /// <summary>
-    /// play a sound at point
+    /// play a sound at point in world
     /// </summary>
     public static void PlayAtPoint(string name, Vector3 position, float spatialBlend = 1.0f)
     {
+        Sound sound = GetSound(name);
+
         // Create new empty object at position
         GameObject soundObject = new GameObject();
         soundObject.transform.position = position;
-        soundObject.name = "Sound Object";
+        soundObject.name = sound.ID;
 
         // Add audio source to empty object and play sound on it
         AudioSource audioSource = soundObject.AddComponent<AudioSource>();
 
-        SetAudioSource(audioSource, GetSound(name));
+        SetAudioSource(audioSource, sound);
         audioSource.spatialBlend = spatialBlend;
 
         audioSource.Play();
@@ -89,7 +111,7 @@ public class AudioPlayer : MonoBehaviour
     }
 
     /// <summary>
-    /// play a sound at point with no overlap allowed
+    /// play a sound at point in world with no overlap allowed
     /// </summary>
     public static void PlaySeperatedAtPoint(string name, Vector3 position, float spatialBlend = 1.0f)
     {
@@ -115,14 +137,56 @@ public class AudioPlayer : MonoBehaviour
         Destroy(audioObject, audioSource.clip.length);
     }
 
+    // TODO: COROUTINES NEEDS MORE TESTING
+
     /// <summary>
-    /// add custom sound to be played using audioplayer 
+    /// play a sound with delay in seconds
     /// </summary>
-    public static Sound AddSound(string name, AudioSource source)
+    public static void PlayWithDelay(string name, float delay)
+    {
+        Instance.StartCoroutine(Instance.PlayWithDelay(GetSound(name), delay));
+    }
+
+    /// <summary>
+    /// play a sound with overlap allowed with delay in seconds
+    /// </summary>
+    public static void PlayOverlapWithDelay(string name, float delay)
+    {
+        Instance.StartCoroutine(Instance.PlayOverlapWithDelay(GetSound(name), delay));
+    }
+
+    /// <summary>
+    /// play a sound seperated with delay in second
+    /// </summary>
+    public static void PlaySeperatedWithDelay(string name, float delay)
+    {
+        Instance.StartCoroutine(Instance.PlaySeperatedWithDelay(GetSound(name), delay));
+    }
+
+    /// <summary>
+    /// play a sound at point with delay in seconds
+    /// </summary>
+    public static void PlayWithDelayAtPoint(string name, float delay, Vector3 position, float spatialBlend = 1.0f)
+    {
+        Instance.StartCoroutine(Instance.PlayWithDelayAtPoint(GetSound(name), delay, position, spatialBlend));
+    }
+
+    /// <summary>
+    /// add custom sound to be stored and used in audioplayer
+    /// </summary>
+    public static bool AddSound(string name, AudioSource source)
     {
         Sound sound = new Sound(name, source);
-        m_Sounds.Add(name, sound);
-        return sound;
+
+        if (!m_Sounds.ContainsKey(name))
+        {
+            m_Sounds.Add(name, sound);
+            return true;
+        }
+        else
+            Debug.LogWarning("cannot add '" + name + "', it already exists");
+
+        return false;
     }
 
     /// <summary>
@@ -137,7 +201,7 @@ public class AudioPlayer : MonoBehaviour
     {
         if (!m_Sounds.ContainsKey(name))
         {
-            Debug.LogWarning(name + " does not exist; check spelling");
+            Debug.LogWarning("'" + name + "' does not exist");
             return m_Sounds["error"];
         }
 
@@ -155,5 +219,28 @@ public class AudioPlayer : MonoBehaviour
         audioSource.volume = sound.Volume;
         audioSource.pitch = sound.Pitch;
         audioSource.loop = sound.Loop;
+    }
+
+    // -- Coroutines --
+
+    private IEnumerator PlayWithDelay(Sound sound, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        Play(sound.Name);
+    }
+    private IEnumerator PlayOverlapWithDelay(Sound sound, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        PlayOverlap(sound.Name);
+    }
+    private IEnumerator PlaySeperatedWithDelay(Sound sound, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        PlaySeperated(sound.Name);
+    }
+    private IEnumerator PlayWithDelayAtPoint(Sound sound, float delay, Vector3 position, float spatialBlend)
+    {
+        yield return new WaitForSeconds(delay);
+        PlayAtPoint(sound.Name, position, spatialBlend);
     }
 }

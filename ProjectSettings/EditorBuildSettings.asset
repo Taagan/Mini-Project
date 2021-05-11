@@ -11,19 +11,4 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/ossians_bana1.unity
     guid: 2ae630008b884d849bbd0c2460178f35
-  - enabled: 1
-    path: Assets/Scenes/Joakim_Scene.unity
-    guid: 1f65ea0397d013a4bb2cab1f336d6389
-  - enabled: 1
-    path: Assets/Scenes/Ossians_testscen.unity
-    guid: c30a0f334547b874c8bf031d8f3072a9
-  - enabled: 1
-    path: Assets/Scenes/Roberts_Scene.unity
-    guid: 67210e6388c06784f9c42e746e7bccca
-  - enabled: 1
-    path: Assets/Scenes/Tobias_Scene.unity
-    guid: fc8fd15eeee56574dad2d805b5f33354
-  - enabled: 1
-    path: Assets/Scenes/Tim_Scene.unity
-    guid: d18e5bcd118421743b7dcbd27e54a839
   m_configObjects: {}
