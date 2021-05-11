@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class GameOverMenu : MonoBehaviour
 {
     [Space(3), Header("Options Buttons")]
+    [SerializeField] private Button m_CheckpointButton = null;
     [SerializeField] private Button m_RestartButton = null;
     [SerializeField] private Button m_MainMenuButton = null;
 
@@ -25,6 +26,7 @@ public class GameOverMenu : MonoBehaviour
 
     private void Start()
     {
+        m_CheckpointButton.onClick.AddListener(LoadCheckpoint);
         m_RestartButton.onClick.AddListener(Restart);
         m_MainMenuButton.onClick.AddListener(OpenMainMenu);
 
@@ -38,16 +40,21 @@ public class GameOverMenu : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.P))
         {
-            if (!m_CoroutineIsRunning)
-            {
-                m_CoroutineIsRunning = true;
-                StartCoroutine(FadeIn());
+            Notify();
+        }
+    }
 
-                Cursor.lockState = CursorLockMode.None;
-                Cursor.visible = true;
+    public void Notify()
+    {
+        if (!m_CoroutineIsRunning)
+        {
+            m_CoroutineIsRunning = true;
+            StartCoroutine(FadeIn());
 
-                m_HUD.SetActive(false);
-            }
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+
+            m_HUD.SetActive(false);
         }
     }
 
@@ -61,6 +68,11 @@ public class GameOverMenu : MonoBehaviour
             yield return null;
             m_OptionsCanvasGroup.alpha += m_FadeInSpeed * Time.deltaTime;
         }
+    }
+
+    private void LoadCheckpoint()
+    {
+        CheckpointManager.LoadCheckpoint();
     }
 
     private void Restart()

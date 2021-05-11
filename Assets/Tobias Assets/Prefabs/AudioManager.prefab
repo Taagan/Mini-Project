@@ -60,6 +60,13 @@ MonoBehaviour:
     m_Pitch: 1.1
     m_Loop: 0
   - source: {fileID: 0}
+    m_Name: checkpoint
+    m_Clip: {fileID: 8300000, guid: 60b6f9a2c9d1b5a4799b2c00f1aa390b, type: 3}
+    m_Output: {fileID: 243448761005511180, guid: 115965ff544e6604aae2a7d1fbd95e99, type: 2}
+    m_Volume: 0.3
+    m_Pitch: 1
+    m_Loop: 0
+  - source: {fileID: 0}
     m_Name: key-pickup
     m_Clip: {fileID: 8300000, guid: 57336d5804159aa41a9b71d13d3321bc, type: 3}
     m_Output: {fileID: 243448761005511180, guid: 115965ff544e6604aae2a7d1fbd95e99, type: 2}

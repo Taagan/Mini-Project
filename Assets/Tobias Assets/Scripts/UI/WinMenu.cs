@@ -35,16 +35,21 @@ public class WinMenu : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.O))
         {
-            if (!m_CoroutineIsRunning)
-            {
-                m_CoroutineIsRunning = true;
-                StartCoroutine(FadeIn());
+            Notify();
+        }
+    }
 
-                Cursor.lockState = CursorLockMode.None;
-                Cursor.visible = true;
+    public void Notify()
+    {
+        if (!m_CoroutineIsRunning)
+        {
+            m_CoroutineIsRunning = true;
+            StartCoroutine(FadeIn());
 
-                m_HUD.SetActive(false);
-            }
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+
+            m_HUD.SetActive(false);
         }
     }
 
