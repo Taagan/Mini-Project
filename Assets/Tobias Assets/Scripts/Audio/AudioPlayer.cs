@@ -12,7 +12,7 @@ public class AudioPlayer : MonoBehaviour
     private string m_StartMusic;
 
     [SerializeField, Space(5)] 
-    private Sound[] m_GameSounds;
+    private List<Sound> m_GameSounds;
 
     private static Dictionary<string, Sound> m_Sounds;
 
@@ -37,6 +37,9 @@ public class AudioPlayer : MonoBehaviour
         }
 
         m_Sounds = m_GameSounds.ToDictionary(key => key.Name, value => value);
+
+        m_GameSounds.Clear(); // no longer needed
+        m_GameSounds = null;
     }
 
     private void Start()
@@ -199,6 +202,12 @@ public class AudioPlayer : MonoBehaviour
 
     public static Sound GetSound(string name)
     {
+        if (Instance == null)
+        {
+            Debug.LogWarning("please create an instance with AudioPlayer before using");
+            return null;
+        }
+
         if (!m_Sounds.ContainsKey(name))
         {
             Debug.LogWarning("'" + name + "' does not exist");
