@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -7,13 +5,13 @@ using UnityEngine;
 /// </summary>
 public class CheckpointManager : MonoBehaviour
 {
-    public static Checkpoint Checkpoint { get; private set; } = null;
+    public static CheckpointCollision Checkpoint { get; private set; } = null;
 
     public static Vector3 Position { get; set; }
     public static Vector3 Rotation { get; set; }
 
 
-    public static bool SaveCheckpoint(Checkpoint checkpoint, Vector3 position, Vector3 rotation)
+    public static bool SaveCheckpoint(CheckpointCollision checkpoint, Vector3 position, Vector3 rotation)
     {
         if (Checkpoint != null &&
             Checkpoint == checkpoint) return false;
@@ -22,13 +20,9 @@ public class CheckpointManager : MonoBehaviour
         Rotation = rotation;
 
         if (Checkpoint != null)
-        {
             Checkpoint.IsFlagged = false;
-            Checkpoint.SetColor();
-        }
 
         checkpoint.IsFlagged = true;
-        checkpoint.SetColor();
 
         Checkpoint = checkpoint;
 
@@ -45,22 +39,22 @@ public class CheckpointManager : MonoBehaviour
 
         GameObject obj = Checkpoint.SavedObject;
 
-        CharacterController charCtrl = null;
+        CharacterController charCtrl = obj.GetComponent<CharacterController>();
 
-        // deactivate character controller temporarily to modify object's position
-        if (charCtrl = obj.GetComponent<CharacterController>())
-        {
+        if (charCtrl != null) // deactivate character controller temporarily to modify object's position
             charCtrl.enabled = false;
-        }
 
         obj.transform.position = Position;
 
-        if (charCtrl)
-        {
+        if (charCtrl != null)
             charCtrl.enabled = true;
-        }
 
         obj.transform.rotation = Quaternion.Euler(Rotation);
+
+        if (obj.CompareTag("Player"))
+        {
+            // modify health etc...
+        }
 
         return true;
     }
