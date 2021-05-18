@@ -12,7 +12,7 @@ public class AudioPlayer : MonoBehaviour
     private string m_StartMusic;
 
     [SerializeField, Space(5)] 
-    private Sound[] m_GameSounds;
+    private List<Sound> m_GameSounds;
 
     private static Dictionary<string, Sound> m_Sounds;
 
@@ -32,11 +32,14 @@ public class AudioPlayer : MonoBehaviour
 
         foreach (Sound sound in m_GameSounds)
         {
-            sound.source = gameObject.AddComponent<AudioSource>();
-            SetAudioSource(sound.source, sound);
+            sound.Source = gameObject.AddComponent<AudioSource>();
+            SetAudioSource(sound.Source, sound);
         }
 
         m_Sounds = m_GameSounds.ToDictionary(key => key.Name, value => value);
+
+        m_GameSounds.Clear(); // no longer needed
+        m_GameSounds = null;
     }
 
     private void Start()
@@ -49,7 +52,7 @@ public class AudioPlayer : MonoBehaviour
     /// </summary>
     public static void Play(string name)
     {
-        GetSound(name).source.Play();
+        GetSound(name).Source.Play();
     }
 
     /// <summary>
@@ -58,7 +61,7 @@ public class AudioPlayer : MonoBehaviour
     public static void PlayOverlap(string name)
     {
         Sound sound = GetSound(name);
-        sound.source.PlayOneShot(sound.source.clip);
+        sound.Source.PlayOneShot(sound.Source.clip);
     }
 
     /// <summary>
@@ -68,8 +71,8 @@ public class AudioPlayer : MonoBehaviour
     {
         Sound sound = GetSound(name);
 
-        if (!sound.source.isPlaying)
-            sound.source.Play();
+        if (!sound.Source.isPlaying)
+            sound.Source.Play();
     }
 
     /// <summary>
@@ -98,7 +101,7 @@ public class AudioPlayer : MonoBehaviour
         soundObject.transform.position = position;
         soundObject.name = sound.ID;
 
-        // Add audio source to empty object and play sound on it
+        // Add audio Source to empty object and play sound on it
         AudioSource audioSource = soundObject.AddComponent<AudioSource>();
 
         SetAudioSource(audioSource, sound);
@@ -125,7 +128,7 @@ public class AudioPlayer : MonoBehaviour
         audioObject.transform.position = position;
         audioObject.name = sound.ID;
 
-        // Add audio source to empty object and play sound on it
+        // Add audio Source to empty object and play sound on it
         AudioSource audioSource = audioObject.AddComponent<AudioSource>();
 
         SetAudioSource(audioSource, sound);
@@ -174,9 +177,9 @@ public class AudioPlayer : MonoBehaviour
     /// <summary>
     /// add custom sound to be stored and used in audioplayer
     /// </summary>
-    public static bool AddSound(string name, AudioSource source)
+    public static bool AddSound(string name, AudioSource Source)
     {
-        Sound sound = new Sound(name, source);
+        Sound sound = new Sound(name, Source);
 
         if (!m_Sounds.ContainsKey(name))
         {
@@ -192,13 +195,19 @@ public class AudioPlayer : MonoBehaviour
     /// <summary>
     /// set custom audio source for sound
     /// </summary>
-    public static void SetSound(string name, AudioSource source)
+    public static void SetSound(string name, AudioSource Source)
     {
-        GetSound(name).source = source;
+        GetSound(name).Source = Source;
     }
 
     public static Sound GetSound(string name)
     {
+        if (Instance == null)
+        {
+            Debug.LogWarning("please create an instance with AudioPlayer before using");
+            return null;
+        }
+
         if (!m_Sounds.ContainsKey(name))
         {
             Debug.LogWarning("'" + name + "' does not exist");

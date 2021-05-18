@@ -7,6 +7,7 @@ public class PauseMenu : MonoBehaviour
 {
     [Space(3), Header("Options Buttons")]
     [SerializeField] private Button m_ResumeButton;
+    [SerializeField] private Button m_CheckpointButton;
     [SerializeField] private Button m_RestartButton;
     [SerializeField] private Button m_MainMenuButton;
 
@@ -22,6 +23,7 @@ public class PauseMenu : MonoBehaviour
     private void Start()
     {
         m_ResumeButton.onClick.AddListener(TogglePause);
+        m_CheckpointButton.onClick.AddListener(LoadCheckpoint);
         m_RestartButton.onClick.AddListener(Restart);
         m_MainMenuButton.onClick.AddListener(OpenMainMenu);
 
@@ -48,6 +50,26 @@ public class PauseMenu : MonoBehaviour
         m_HUD.SetActive(!IsPaused);
         m_Confirm.SetActive(false);
         m_Options.SetActive(IsPaused);
+    }
+
+    private void LoadCheckpoint()
+    {
+        m_Confirm.SetActive(true);
+        m_Options.SetActive(false);
+
+        m_ConfirmMenu.YesAction(new UnityAction(() =>
+        {
+            CheckpointManager.LoadCheckpoint();
+            TogglePause();
+
+            m_Confirm.SetActive(false);
+        }));
+
+        m_ConfirmMenu.NoAction(new UnityAction(() =>
+        {
+            m_Confirm.SetActive(false);
+            m_Options.SetActive(true);
+        }));
     }
 
     private void Restart()
