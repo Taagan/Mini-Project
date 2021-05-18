@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
 
 public class PauseMenu : MonoBehaviour
 {
@@ -31,18 +32,15 @@ public class PauseMenu : MonoBehaviour
         IsPaused = false;
     }
 
-    private void Update()
+    
+    public void OnPause(InputValue input)
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            TogglePause();
-        }
+        TogglePause();
     }
 
     private void TogglePause()
     {
         IsPaused = !IsPaused;
-        Time.timeScale = 1.0f - Time.timeScale;
 
         Cursor.lockState = (IsPaused) ? CursorLockMode.None : CursorLockMode.Locked;
         Cursor.visible = IsPaused;

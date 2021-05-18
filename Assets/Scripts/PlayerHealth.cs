@@ -44,8 +44,11 @@ public class PlayerHealth : MonoBehaviour
         dmgCDTimer = dmgCDTime;
     }
 
-    public void ResetHealth()
+    public void Reset()
     {
         HP = maxHP;
+
+        GetComponent<MovementInputController>().enabled = true;
+        GetComponent<AnimationMovementController>().enabled = true;
     }
 }

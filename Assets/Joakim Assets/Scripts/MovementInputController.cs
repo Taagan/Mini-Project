@@ -6,6 +6,8 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(PlayerInput))]
 public class MovementInputController : MonoBehaviour
 {
+    public GameObject pausmeny;
+
     public Vector2 move;
     public Vector2 look;
     public float aimInput;
@@ -42,6 +44,11 @@ public class MovementInputController : MonoBehaviour
     public void OnFire(InputValue value)
     {
         fireInput = value.Get<float>();
+    }
+
+    public void OnPause(InputValue value)
+    {
+        pausmeny.GetComponent<PauseMenu>().OnPause(value);
     }
 
     private void Start()
