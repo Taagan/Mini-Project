@@ -54,6 +54,7 @@ public class CheckpointManager : MonoBehaviour
         if (obj.CompareTag("Player"))
         {
             // modify health etc...
+            obj.GetComponent<PlayerHealth>().Reset();
         }
 
         return true;
