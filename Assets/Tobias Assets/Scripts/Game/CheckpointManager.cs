@@ -55,6 +55,9 @@ public class CheckpointManager : MonoBehaviour
         {
             // modify health etc...
             obj.GetComponent<PlayerHealth>().Reset();
+
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
         }
 
         return true;
