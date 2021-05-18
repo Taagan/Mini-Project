@@ -30,14 +30,7 @@ public class WinMenu : MonoBehaviour
 
         m_CoroutineIsRunning = false;
     }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.O))
-        {
-            Notify();
-        }
-    }
+    
 
     public void Notify()
     {
