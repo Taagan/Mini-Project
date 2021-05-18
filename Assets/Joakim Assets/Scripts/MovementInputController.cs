@@ -10,12 +10,14 @@ public class MovementInputController : MonoBehaviour
     public Vector2 look;
     public float aimInput;
     public float fireInput;
+    public bool isMoving;
 
     public Vector3 nextPosition;
     public Quaternion nextRotation;
 
     public float rotationPower = 3f;
     public float rotationLerp = 0.5f;
+   
 
     public float speed = 1f;
     public Camera mainCamera;
@@ -73,7 +75,7 @@ public class MovementInputController : MonoBehaviour
         if (move.x == 0 && move.y == 0)
         {
             nextPosition = transform.position;
-
+            isMoving = false;
             if (aimInput == 1)
             {
                 transform.rotation = Quaternion.Euler(0, followTransform.transform.rotation.eulerAngles.y, 0);
@@ -85,7 +87,7 @@ public class MovementInputController : MonoBehaviour
         float moveSpeed = speed / 100f;
         Vector3 position = (transform.forward * move.y * moveSpeed) + (transform.right * move.x * moveSpeed);
         nextPosition = transform.position + position;
-
+        isMoving = true;
         transform.rotation = Quaternion.Euler(0, followTransform.transform.rotation.eulerAngles.y, 0);
         followTransform.transform.localEulerAngles = new Vector3(angles.x, 0, 0);
     }

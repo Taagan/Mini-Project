@@ -51,8 +51,8 @@ public class AnimationMovementController : MonoBehaviour
         }
 
        
-        moving = velocity.magnitude > magnitude;
-
+       
+        moving = movement.isMoving;
         bool isAiming = (movement.aimInput == 1f);
 
 
