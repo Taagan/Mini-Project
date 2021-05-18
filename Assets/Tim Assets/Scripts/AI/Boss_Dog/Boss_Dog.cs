@@ -8,6 +8,7 @@ public class Boss_Dog : Enemy
     [SerializeField] public GameObject minion;
     [SerializeField] private GameObject sword;
     [SerializeField] private Rigidbody rb;
+    [SerializeField] public Animator animator;
     [SerializeField] private float maxStamina;
     [SerializeField] private float restingAmountStamina = 100;
     [SerializeField] private float restingRateStamina = 0.4f;
@@ -20,6 +21,10 @@ public class Boss_Dog : Enemy
     [SerializeField] private Slider staminaSlider;
     [SerializeField] private NavMeshAgent navMeshAgent;
     private bool charging;
+    private bool phaseChange;
+    private bool phaseChange2;
+    private bool phaseChange3;
+
     private Vector3 lastPlayerPos;
 
     Node baseNode;
@@ -58,13 +63,14 @@ public class Boss_Dog : Enemy
     {
         navMeshAgent.speed = speed;
         hp = maxHp;
+        animator = GetComponentInChildren<Animator>();
     }
 
 
     public void FixedUpdate()
     {
         baseNode.Execute();
-        staminaSlider.value = stamina / maxStamina;
+        //staminaSlider.value = stamina / maxStamina;
     }
 
     public override void Attack()
@@ -91,6 +97,9 @@ public class Boss_Dog : Enemy
 
     private void Phase_I()
     {
+        Debug.Log("in phase 1");
+        animator.SetBool("Phase1", true);
+        animator.SetBool("Idle", false);
         navMeshAgent.isStopped = false;
         navMeshAgent.SetDestination(player.transform.position);
         sword.transform.Rotate(new Vector3(0, 10, 0));
@@ -100,55 +109,97 @@ public class Boss_Dog : Enemy
 
     private void Phase_II()
     {
-        if (sword.gameObject.active)
+        LookAtPlayer();
+        if (!phaseChange)
         {
-            sword.SetActive(false);
+            animator.SetTrigger("PhaseChange");
+            phaseChange = true;
         }
-        GameObject missle = (GameObject)Instantiate(magicMissle, this.transform.position + (transform.forward * 5), this.transform.rotation);
-        missle.GetComponent<MagicMissleScript>().destiantion = player.transform.position;
-        navMeshAgent.isStopped = true;
-        stamina -= phase_II_StaminaRate;
-        //Shot magic missles
+        else
+        {
+            if (sword.gameObject.active)
+            {
+                sword.SetActive(false);
+            }
+            animator.SetBool("Idle", false);
+            animator.SetBool("Phase1", false);
+            animator.SetBool("Phase2", true);
+
+            GameObject missle = (GameObject)Instantiate(magicMissle, this.transform.position + (transform.forward * 5), this.transform.rotation);
+            missle.GetComponent<MagicMissleScript>().destiantion = player.transform.position;
+            animator.SetTrigger("Attack");
+            navMeshAgent.isStopped = true;
+            stamina -= phase_II_StaminaRate;
+            //Shot magic missles
+        }
     }
 
     private void Phase_III()
     {
+        LookAtPlayer();
+        if (!phaseChange2)
+        {
+            animator.SetTrigger("PhaseChange");
+            phaseChange2 = true;
+        }
+        else
+        {
+            animator.SetBool("Idle", false);
+            animator.SetBool("Phase1", false);
+            animator.SetBool("Phase2", false);
+            animator.SetBool("Phase3", true);
+            Vector3 targetDir = player.transform.position - transform.position;
 
-        Vector3 targetDir = player.transform.position - transform.position;
+            Vector3 newDir = Vector3.RotateTowards(transform.forward, targetDir, 100, 0.0f);
 
-        Vector3 newDir = Vector3.RotateTowards(transform.forward, targetDir, 100, 0.0f);
+            transform.rotation = Quaternion.LookRotation(newDir);
 
-        transform.rotation = Quaternion.LookRotation(newDir);
-
-        Instantiate(minion, this.transform.position + (transform.forward * 5), this.transform.rotation);
-        Instantiate(minion, this.transform.position + (transform.forward * 10), this.transform.rotation);
-        stamina -= phase_III_StaminaRate;
-        //Spawn minions
+            Instantiate(minion, this.transform.position + (transform.forward * 5), this.transform.rotation);
+            Instantiate(minion, this.transform.position + (transform.forward * 10), this.transform.rotation);
+            animator.SetTrigger("Attack");
+            stamina -= phase_III_StaminaRate;
+            //Spawn minions
+        }
     }
 
     private void Phase_IV()
     {
-        if (charging)
+        if (!phaseChange3)
         {
-            transform.position += transform.forward * speed * Time.deltaTime * 3;
+            animator.SetTrigger("PhaseChange");
+            phaseChange3 = true;
         }
-        else if (!charging)
+        else
         {
-            lastPlayerPos = player.transform.position;
+            animator.SetBool("Idle", false);
+            animator.SetBool("Phase1", false);
+            animator.SetBool("Phase2", false);
+            animator.SetBool("Phase3", false);
+            if (charging)
+            {
+                transform.position += transform.forward * speed * Time.deltaTime * 3;
+                animator.SetBool("Charging", true);
+            }
+            else if (!charging)
+            {
+                lastPlayerPos = player.transform.position;
 
-            Vector3 targetDir = lastPlayerPos - transform.position;
+                Vector3 targetDir = lastPlayerPos - transform.position;
 
-            Vector3 newDir = Vector3.RotateTowards(transform.forward, targetDir, 1000, 0.0f);
+                Vector3 newDir = Vector3.RotateTowards(transform.forward, targetDir, 1000, 0.0f);
 
-            transform.rotation = Quaternion.LookRotation(newDir);
+                transform.rotation = Quaternion.LookRotation(newDir);
 
-            charging = true;
+                charging = true;
+            }
+            //Charge
         }
-        //Charge
     }
 
     public override void Idle()
     {
+        LookAtPlayer();
+        animator.SetBool("Idle", true);
         rb.velocity = Vector3.zero;
         navMeshAgent.isStopped = true;
         if (resting)
@@ -185,9 +236,23 @@ public class Boss_Dog : Enemy
             {
                 stamina -= phase_IV_StaminaRate;
                 rb.velocity = Vector3.zero;
+                animator.SetTrigger("Dizzy");
                 charging = false;
             }
         }
+    }
+
+
+
+    private void LookAtPlayer()
+    {
+        Vector3 targetDir = player.transform.position - transform.position;
+
+        Vector3 newDir = Vector3.RotateTowards(transform.forward, targetDir, 1000, 0.0f);
+
+        Debug.DrawRay(transform.position, newDir, Color.red);
+
+        transform.rotation = Quaternion.LookRotation(newDir);
     }
 
 
