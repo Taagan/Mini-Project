@@ -229,8 +229,7 @@ public class Boss_Dog : Enemy
 
     }
 
-
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider collision)
     {
         if (charging)
         {
@@ -249,6 +248,7 @@ public class Boss_Dog : Enemy
             {
                 wm.Notify();
                 Destroy(navMeshAgent);
+                Destroy(staminaSlider);
                 animator.SetTrigger("DIE");
             }
             Destroy(collision.gameObject);
