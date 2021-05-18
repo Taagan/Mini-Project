@@ -54,4 +54,10 @@ public class Enemy : MonoBehaviour
 
     public virtual void Idle() { }
 
+
+
+    public virtual void TakeDamage(int damage)
+    {
+        hp -= damage;
+    }
 }

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2810675857265164842}
   m_Layer: 0
   m_Name: magic_missile
-  m_TagString: Untagged
+  m_TagString: Generic_hurt
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -57,7 +57,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3451227485525097665}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.5
   m_Height: 4.005515
