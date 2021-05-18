@@ -81,6 +81,9 @@ public class SettingsManager : MonoBehaviour
         m_GameSettings.MusicVolume = PlayerPrefs.GetFloat(m_MusicVolume, 1.0f);
         m_GameSettings.EffectsVolume = PlayerPrefs.GetFloat(m_EffectsVolume, 1.0f);
         m_GameSettings.MouseSensitivity = PlayerPrefs.GetFloat(m_MouseSensitivity, 1.0f);
+
+        m_GameSettings.ResolutionIndex = (m_GameSettings.ResolutionIndex >= m_Resolutions.Length) 
+            ? m_Resolutions.Length - 1 : m_GameSettings.ResolutionIndex;
     }
 
     /// <summary>
