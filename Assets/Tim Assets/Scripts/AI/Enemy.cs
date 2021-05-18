@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] protected GameObject player;
+    protected GameObject player;
     [SerializeField] protected int maxHp;
     [SerializeField] protected int hp;
     [SerializeField] protected int speed;
@@ -19,6 +19,11 @@ public class Enemy : MonoBehaviour
     public Enemy()
     {
 
+    }
+
+    protected virtual void Start()
+    {
+        player = GameObject.FindGameObjectWithTag("Player");
     }
 
     public virtual GameObject Player { get { return player; } }

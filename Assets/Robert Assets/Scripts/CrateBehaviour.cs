@@ -9,7 +9,7 @@ public class CrateBehaviour : MonoBehaviour
 
     private void OnTriggerEnter(Collider collider)
     {
-        if (collider.gameObject.name == "Player") // TODO: Change to name == Arrow
+        if (collider.gameObject.CompareTag("Arrow"))
         {
             GameVariables.crateDestroys++;
             Destroy(gameObject);

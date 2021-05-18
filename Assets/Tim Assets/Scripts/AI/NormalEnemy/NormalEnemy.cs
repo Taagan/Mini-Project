@@ -52,10 +52,10 @@ public class NormalEnemy : Enemy
     }
 
 
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
         navMeshAgent.speed = speed;
-        player = GameObject.FindGameObjectWithTag("Player");
     }
 
 
@@ -65,6 +65,17 @@ public class NormalEnemy : Enemy
         //staminaSlider.value = stamina / maxStamina;
         //Debug.Log(stamina);
     }
+
+
+    private void OnTriggerEnter(Collider collision)
+    {
+        if (collision.gameObject.CompareTag("Arrow"))
+        {
+            Destroy(collision.gameObject);
+            Destroy(gameObject, .16f);
+        }
+    }
+
 
     public override void Attack()
     {

@@ -11,13 +11,12 @@ public class PlayerHUD : MonoBehaviour
     [SerializeField] private Slider m_HealthBar;
     [SerializeField] private Image m_KeysImage;
     [SerializeField] private Text m_KeysText;
-
-    [Space(3), Header("Player")]
-    [SerializeField] private Health m_PlayerHealth;
+    
+    private PlayerHealth m_PlayerHealth;
 
     private void Start()
     {
-        m_PlayerHealth = GameObject.FindGameObjectWithTag("Player").GetComponent<Health>();
+        m_PlayerHealth = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>();
     }
 
     private void LateUpdate()
@@ -28,5 +27,6 @@ public class PlayerHUD : MonoBehaviour
     public void Notify()
     {
         m_KeysText.text = GameVariables.keysInventory.ToString();
+        m_HealthBar.value = (float)m_PlayerHealth.HP / (float)m_PlayerHealth.maxHP;
     }
 }

@@ -31,6 +31,7 @@ public class MovementInputController : MonoBehaviour
     public void OnLook(InputValue value)
     {
         look = value.Get<Vector2>();
+        look.y *= -1;
     }
 
     public void OnAim(InputValue value)
@@ -86,7 +87,7 @@ public class MovementInputController : MonoBehaviour
         }
         float moveSpeed = speed / 100f;
         Vector3 position = (transform.forward * move.y * moveSpeed) + (transform.right * move.x * moveSpeed);
-        nextPosition = transform.position + position;
+        nextPosition = transform.position + position * Time.deltaTime;
         isMoving = true;
         transform.rotation = Quaternion.Euler(0, followTransform.transform.rotation.eulerAngles.y, 0);
         followTransform.transform.localEulerAngles = new Vector3(angles.x, 0, 0);

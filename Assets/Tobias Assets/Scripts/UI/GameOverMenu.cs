@@ -36,14 +36,6 @@ public class GameOverMenu : MonoBehaviour
         m_CoroutineIsRunning = false;
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            Notify();
-        }
-    }
-
     public void Notify()
     {
         if (!m_CoroutineIsRunning)

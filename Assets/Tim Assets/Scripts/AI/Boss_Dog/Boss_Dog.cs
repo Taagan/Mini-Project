@@ -59,8 +59,9 @@ public class Boss_Dog : Enemy
     }
 
 
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
         navMeshAgent.speed = speed;
         hp = maxHp;
         animator = GetComponentInChildren<Animator>();
