@@ -25,6 +25,7 @@ public class Boss_Dog : Enemy
     private bool phaseChange2;
     private bool phaseChange3;
 
+    [SerializeField]private WinMenu wm;
     private Vector3 lastPlayerPos;
 
     Node baseNode;
@@ -71,7 +72,7 @@ public class Boss_Dog : Enemy
     public void FixedUpdate()
     {
         baseNode.Execute();
-        //staminaSlider.value = stamina / maxStamina;
+        staminaSlider.value = (float)hp / maxHp;
     }
 
     public override void Attack()
@@ -241,7 +242,20 @@ public class Boss_Dog : Enemy
                 charging = false;
             }
         }
+        if (collision.gameObject.tag == "Arrow")
+        {
+            TakeDamage(2);
+            if (hp <= 0)
+            {
+                wm.Notify();
+                Destroy(navMeshAgent);
+                animator.SetTrigger("DIE");
+            }
+            Destroy(collision.gameObject);
+        }
     }
+
+    
 
 
 
