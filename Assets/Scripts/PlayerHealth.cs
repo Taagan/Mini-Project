@@ -12,6 +12,10 @@ public class PlayerHealth : MonoBehaviour
     public float dmgCDTime = .5f;
     public float dmgCDTimer = 0;
 
+
+
+  
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Generic_hurt"))
@@ -32,13 +36,20 @@ public class PlayerHealth : MonoBehaviour
             return;
 
         HP -= dmg;
+        GetComponent<AnimationMovementController>().getHit();
         
         if (HP <= 0)
         {
-            gameOverMenu.Notify();
+            GetComponent<AnimationMovementController>().Die();
+            
+            
             //Time.timeScale = 0.01f;
             GetComponent<MovementInputController>().enabled = false;
             GetComponent<AnimationMovementController>().enabled = false;
+            GetComponent<AimController>().enabled = false;
+            GetComponent<CapsuleCollider>().enabled = false;
+            gameOverMenu.Notify();
+
         }
 
         dmgCDTimer = dmgCDTime;

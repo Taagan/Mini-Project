@@ -31,8 +31,13 @@ public class AnimationMovementController : MonoBehaviour
     public Transform arrowBone;
     public GameObject arrowPrefab;
 
- 
-   
+
+    public float timeBetweenShots = 1f;  // Allow 3 shots per second
+
+    private float timestamp;
+
+
+
     public void Update()
     {
         Vector3 worldPosition = movement.nextPosition - transform.position;
@@ -58,11 +63,12 @@ public class AnimationMovementController : MonoBehaviour
 
         if (isAiming)
         {
-            if ((movement.fireInput == 1f))
+            if ((Time.time >= timestamp) && (movement.fireInput == 1f))
             {
                 animator.SetTrigger("Fire");
                 arrow.SetActive(false);
                 StartCoroutine(FireArrow());
+                timestamp = Time.time + timeBetweenShots;
             }
 
 
@@ -81,7 +87,8 @@ public class AnimationMovementController : MonoBehaviour
         animator.SetBool("IsAiming", isAiming);
         animator.SetBool("IsMoving", moving);
         animator.SetFloat("VelocityX", velocity.x);
-        animator.SetFloat("VelocityY", Mathf.Abs(velocity.y));  
+        animator.SetFloat("VelocityY", Mathf.Abs(velocity.y));
+        
     }
 
     private void OnAnimatorMove()
@@ -103,5 +110,14 @@ public class AnimationMovementController : MonoBehaviour
 
     }
 
+    public void getHit()
+    {
+        animator.SetTrigger("GetHit");
+    }
+
+    public void Die()
+    {
+        animator.SetBool("IsDead2", true);
+    }
 
 }
