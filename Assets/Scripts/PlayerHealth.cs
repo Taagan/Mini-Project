@@ -61,5 +61,7 @@ public class PlayerHealth : MonoBehaviour
 
         GetComponent<MovementInputController>().enabled = true;
         GetComponent<AnimationMovementController>().enabled = true;
+        GetComponent<AimController>().enabled = true;
+        GetComponent<CapsuleCollider>().enabled = true;
     }
 }
