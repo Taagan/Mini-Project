@@ -62,8 +62,6 @@ public class NormalEnemy : Enemy
     public void FixedUpdate()
     {
         baseNode.Execute();
-        //staminaSlider.value = stamina / maxStamina;
-        //Debug.Log(stamina);
     }
 
 
@@ -80,51 +78,11 @@ public class NormalEnemy : Enemy
     public override void Attack()
     {
         navMeshAgent.SetDestination(player.transform.position);
-
-
-
-
-        //rb.velocity = Vector3.zero;
-        //float moveSpeed = speed * Time.deltaTime;
-
-        ////Do attack behaviour
-        //Vector3 targetDir = player.transform.position - transform.position;
-
-        //Vector3 newDir = Vector3.RotateTowards(transform.forward, targetDir, moveSpeed, 0.0f);
-
-        //Debug.DrawRay(transform.position, newDir, Color.red);
-
-        //transform.rotation = Quaternion.LookRotation(newDir);
-
-        //rb.velocity = transform.forward * moveSpeed;
-
-        //stamina -= attackRateStamina;
-        //Debug.Log("Attacking");
     }
 
     public override void Flee()
     {
-
         navMeshAgent.SetDestination(player.transform.position);
-
-        //rb.velocity = Vector3.zero;
-        //float moveSpeed = speed * Time.deltaTime;
-
-        ////Do flee behaviour
-        //Vector3 targetDir = player.transform.position - transform.position;
-
-        //Vector3 newDir = Vector3.RotateTowards(transform.forward, -targetDir, moveSpeed, 0.0f);
-
-        //Debug.DrawRay(transform.position, newDir, Color.red);
-
-        //transform.rotation = Quaternion.LookRotation(newDir);
-
-        //rb.velocity = transform.forward * moveSpeed;
-
-        //stamina -= fleeRateStamina;
-
-
-        //Debug.Log("Fleeing");
     }
 
     public override void Idle()
@@ -150,9 +108,6 @@ public class NormalEnemy : Enemy
         {
             stamina = 0;
         }
-        //Do idle behaviour
-        Debug.Log("Idle");
-
     }
 
 

@@ -224,8 +224,6 @@ public class Boss_Dog : Enemy
         {
             stamina = 0;
         }
-        //Do idle behaviour
-        Debug.Log("Idle");
 
     }
 
