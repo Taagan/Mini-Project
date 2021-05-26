@@ -42,6 +42,11 @@ public class PauseMenu : MonoBehaviour
     {
         IsPaused = !IsPaused;
 
+        if (IsPaused)
+            Time.timeScale = 0;
+        else
+            Time.timeScale = 1;
+
         Cursor.lockState = (IsPaused) ? CursorLockMode.None : CursorLockMode.Locked;
         Cursor.visible = IsPaused;
 
