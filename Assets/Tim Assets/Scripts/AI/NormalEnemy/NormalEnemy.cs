@@ -71,6 +71,7 @@ public class NormalEnemy : Enemy
         {
             Destroy(collision.gameObject);
             Destroy(gameObject, .16f);
+            AudioPlayer.PlayAtPoint("hit_01", gameObject.transform.position, 1.0f);
         }
     }
 

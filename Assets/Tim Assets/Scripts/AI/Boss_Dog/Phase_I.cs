@@ -13,7 +13,6 @@ public class Phase_I : Node
         {
             enemy.CurrentPhase = Enemy.Phase.I;
             enemy.Attack();
-            Debug.Log("Phase 1");
             return NodeState.Success;
             
         }

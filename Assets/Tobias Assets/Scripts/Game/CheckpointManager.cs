@@ -10,7 +10,6 @@ public class CheckpointManager : MonoBehaviour
     public static Vector3 Position { get; set; }
     public static Vector3 Rotation { get; set; }
 
-
     public static bool SaveCheckpoint(CheckpointCollision checkpoint, Vector3 position, Vector3 rotation)
     {
         if (Checkpoint != null &&
@@ -53,11 +52,9 @@ public class CheckpointManager : MonoBehaviour
 
         if (obj.CompareTag("Player"))
         {
-            // modify health etc...
-            obj.GetComponent<PlayerHealth>().Reset();
-
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
+            obj.GetComponent<PlayerHealth>().ResetPlayer();
+            obj.GetComponent<MovementInputController>().nextPosition = Position; // set new position...
+            obj.GetComponent<AnimationMovementController>().getHit(); // ugly fix to prevent player being stuck in dead animation
         }
 
         return true;

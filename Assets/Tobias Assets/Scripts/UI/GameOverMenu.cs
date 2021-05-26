@@ -60,11 +60,20 @@ public class GameOverMenu : MonoBehaviour
             yield return null;
             m_OptionsCanvasGroup.alpha += m_FadeInSpeed * Time.deltaTime;
         }
+
+        m_CoroutineIsRunning = false;
     }
 
     private void LoadCheckpoint()
     {
-        CheckpointManager.LoadCheckpoint();
+        if (!CheckpointManager.LoadCheckpoint())
+            return;
+
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+
+        m_HUD.SetActive(true);
+        m_Options.SetActive(false);
     }
 
     private void Restart()

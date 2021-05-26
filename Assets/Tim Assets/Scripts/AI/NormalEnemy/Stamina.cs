@@ -16,12 +16,9 @@ public class Stamina : Node
         }
         else if (!enemy.Resting)
         {
-            Debug.Log("go rest");
             enemy.Resting = true;
-            Debug.Log(enemy.Resting);
             return NodeState.Failure;
         }
-        Debug.Log("resting");
         return NodeState.Failure;
     }
 }

@@ -12,9 +12,18 @@ public class PlayerHealth : MonoBehaviour
     public float dmgCDTime = .5f;
     public float dmgCDTimer = 0;
 
+    private MovementInputController inputCtrlr;
+    private AnimationMovementController mvntCtrlr;
+    private AimController aimCtrlr;
+    private CapsuleCollider capsCollider;
 
-
-  
+    private void Awake()
+    {
+        inputCtrlr = GetComponent<MovementInputController>();
+        mvntCtrlr = GetComponent<AnimationMovementController>();
+        aimCtrlr = GetComponent<AimController>();
+        capsCollider = GetComponent<CapsuleCollider>();
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -36,32 +45,34 @@ public class PlayerHealth : MonoBehaviour
             return;
 
         HP -= dmg;
-        GetComponent<AnimationMovementController>().getHit();
+        mvntCtrlr.getHit();
         
         if (HP <= 0)
         {
-            GetComponent<AnimationMovementController>().Die();
-            
-            
-            //Time.timeScale = 0.01f;
-            GetComponent<MovementInputController>().enabled = false;
-            GetComponent<AnimationMovementController>().enabled = false;
-            GetComponent<AimController>().enabled = false;
-            GetComponent<CapsuleCollider>().enabled = false;
-            gameOverMenu.Notify();
+            mvntCtrlr.Die(true);
 
+            inputCtrlr.enabled = false;
+            mvntCtrlr.enabled = false;
+            aimCtrlr.enabled = false;
+            capsCollider.enabled = false;
+
+            gameOverMenu.Notify();
         }
+
+        AudioPlayer.PlayAtPoint("grunt", gameObject.transform.position, 0.5f);
 
         dmgCDTimer = dmgCDTime;
     }
 
-    public void Reset()
+    public void ResetPlayer()
     {
         HP = maxHP;
 
-        GetComponent<MovementInputController>().enabled = true;
-        GetComponent<AnimationMovementController>().enabled = true;
-        GetComponent<AimController>().enabled = true;
-        GetComponent<CapsuleCollider>().enabled = true;
+        inputCtrlr.enabled = true;
+        mvntCtrlr.enabled = true;
+        aimCtrlr.enabled = true;
+        capsCollider.enabled = true;
+
+        mvntCtrlr.Die(false);
     }
 }

@@ -36,7 +36,7 @@ public class AnimationMovementController : MonoBehaviour
 
     private float timestamp;
 
-
+    private bool playPullSound = true;
 
     public void Update()
     {
@@ -81,8 +81,16 @@ public class AnimationMovementController : MonoBehaviour
                 arrow.SetActive(true);
             }
 
+            if (playPullSound)
+            {
+                AudioPlayer.PlayAtPoint("bow-pull", gameObject.transform.position, 1.0f);
+                playPullSound = false;
+            }
+
             movement.fireInput = 0f;
         }
+        else
+            playPullSound = true;
 
         animator.SetBool("IsAiming", isAiming);
         animator.SetBool("IsMoving", moving);
@@ -105,7 +113,7 @@ public class AnimationMovementController : MonoBehaviour
         projectile.transform.forward = look.transform.forward;
         projectile.transform.position = fireTransform.position + fireTransform.forward;
         yield return new WaitForSeconds(0.1f);
-        arrowSound.Play();
+        AudioPlayer.PlayAtPoint("bow-fire_01", gameObject.transform.position, 0.5f);
         projectile.GetComponent<ArrowProjectile>().Fire();
 
     }
@@ -115,9 +123,9 @@ public class AnimationMovementController : MonoBehaviour
         animator.SetTrigger("GetHit");
     }
 
-    public void Die()
+    public void Die(bool die)
     {
-        animator.SetBool("IsDead2", true);
+        animator.SetBool("IsDead2", die);
     }
 
 }

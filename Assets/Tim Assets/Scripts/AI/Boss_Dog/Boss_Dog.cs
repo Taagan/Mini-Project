@@ -99,7 +99,6 @@ public class Boss_Dog : Enemy
 
     private void Phase_I()
     {
-        Debug.Log("in phase 1");
         animator.SetBool("Phase1", true);
         animator.SetBool("Idle", false);
         navMeshAgent.isStopped = false;
@@ -250,6 +249,7 @@ public class Boss_Dog : Enemy
                 animator.SetTrigger("DIE");
             }
             Destroy(collision.gameObject);
+            AudioPlayer.PlayAtPoint("hit_01", gameObject.transform.position, 1.0f);
         }
     }
 
