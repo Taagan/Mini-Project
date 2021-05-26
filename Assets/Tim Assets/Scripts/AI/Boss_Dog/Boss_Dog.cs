@@ -240,7 +240,7 @@ public class Boss_Dog : Enemy
         }
         if (collision.gameObject.tag == "Arrow")
         {
-            TakeDamage(2);
+            TakeDamage(5);
             if (hp <= 0)
             {
                 wm.Notify();
